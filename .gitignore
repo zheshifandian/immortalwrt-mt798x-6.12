@@ -35,3 +35,10 @@ git-src
 .cproject
 .ccache
 .vscode*
+
+package/mod/adguardhome
+package/mod/luci-app-adguardhome
+package/mod/luci-app-openclash
+!/dl/datconf*
+!/dl/mt79*
+!/dl/warp*
