@@ -6,8 +6,16 @@ config GCC_VERSION_13
 	default y if GCC_USE_VERSION_13
 	bool
 
+config GCC_VERSION_14
+	default y if GCC_USE_VERSION_14
+	bool
+
 config GCC_VERSION_15
 	default y if GCC_USE_VERSION_15
+	bool
+
+config GCC_VERSION_16
+	default y if GCC_USE_VERSION_16
 	bool
 
 config GCC_VERSION
@@ -15,10 +23,11 @@ config GCC_VERSION
 	default EXTERNAL_GCC_VERSION	if EXTERNAL_TOOLCHAIN && !NATIVE_TOOLCHAIN
 	default "12.3.0"	if GCC_VERSION_12
 	default "13.4.0"	if GCC_VERSION_13
+	default "14.4.0"	if GCC_VERSION_14
 	default "15.2.0"	if GCC_VERSION_15
-	default "14.3.0"
+	default "16.2.0"
 
 config GCC_USE_DEFAULT_VERSION
 	bool
-	default y if !TOOLCHAINOPTS || GCC_USE_VERSION_14
+	default y if !TOOLCHAINOPTS || GCC_USE_VERSION_16
 	# imply KERNEL_WERROR
