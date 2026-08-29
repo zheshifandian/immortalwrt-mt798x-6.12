@@ -28,11 +28,9 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  drivers/net/ethernet/mediatek/mtk_eth_soc.c | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_eth_soc.c b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-index c56af53..7954d95 100644
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -5311,7 +5311,11 @@ static int mtk_sgmii_init(struct mtk_eth *eth)
+@@ -5445,7 +5445,11 @@ static int mtk_sgmii_init(struct mtk_eth
  		regmap = syscon_node_to_regmap(np);
  		flags = 0;
  		if (of_property_read_bool(np, "mediatek,pnswap"))
@@ -45,6 +43,3 @@ index c56af53..7954d95 100644
  
  		of_node_put(np);
  
--- 
-2.45.2
-

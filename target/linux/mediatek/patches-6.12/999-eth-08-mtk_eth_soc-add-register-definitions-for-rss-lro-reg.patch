@@ -101,7 +101,7 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: add register definitions for rss
  /* Frame Engine Interrupt Grouping Register */
  #define MTK_FE_INT_GRP		0x20
  
-@@ -1213,16 +1210,30 @@ struct mtk_reg_map {
+@@ -1218,16 +1215,30 @@ struct mtk_reg_map {
  	u32	tx_irq_mask;
  	u32	tx_irq_status;
  	struct {

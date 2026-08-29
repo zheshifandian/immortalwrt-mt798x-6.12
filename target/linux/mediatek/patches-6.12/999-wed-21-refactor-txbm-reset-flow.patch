@@ -11,11 +11,9 @@ Signed-off-by: Rex Lu <rex.lu@mediatek.com>
  drivers/net/ethernet/mediatek/mtk_wed.c | 19 +++++++++++++++----
  1 file changed, 15 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_wed.c b/drivers/net/ethernet/mediatek/mtk_wed.c
-index 0c2bb61..d26d3d6 100644
 --- a/drivers/net/ethernet/mediatek/mtk_wed.c
 +++ b/drivers/net/ethernet/mediatek/mtk_wed.c
-@@ -2182,21 +2182,32 @@ mtk_wed_reset_dma(struct mtk_wed_device *dev)
+@@ -2195,21 +2195,32 @@ mtk_wed_reset_dma(struct mtk_wed_device
  
  	/* 3. reset WED TX BM */
  	wed_clr(dev, MTK_WED_CTRL, MTK_WED_CTRL_WED_TX_FREE_AGENT_EN);
@@ -52,6 +50,3 @@ index 0c2bb61..d26d3d6 100644
  
  	/* 4. reset WED WPDMA tx */
  	mtk_wed_wpdma_tx_reset(dev);
--- 
-2.45.2
-

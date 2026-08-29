@@ -242,7 +242,7 @@ WiFi roams.
  		ret = snprintf(name, sizeof(name), "qdma_sch%ld", i);
 --- a/net/netfilter/nf_flow_table_core.c
 +++ b/net/netfilter/nf_flow_table_core.c
-@@ -372,6 +372,45 @@ void flow_offload_teardown_by_tuple(stru
+@@ -373,6 +373,45 @@ void flow_offload_teardown_by_tuple(stru
  }
  EXPORT_SYMBOL_GPL(flow_offload_teardown_by_tuple);
  
@@ -290,7 +290,7 @@ WiFi roams.
  		    struct flow_offload_tuple *tuple)
 --- a/include/net/netfilter/nf_flow_table.h
 +++ b/include/net/netfilter/nf_flow_table.h
-@@ -296,6 +296,7 @@ void nf_flow_table_free(struct nf_flowta
+@@ -309,6 +309,7 @@ void nf_flow_table_free(struct nf_flowta
  
  void flow_offload_teardown(struct flow_offload *flow);
  void flow_offload_teardown_by_tuple(struct flow_offload_tuple *tuple);

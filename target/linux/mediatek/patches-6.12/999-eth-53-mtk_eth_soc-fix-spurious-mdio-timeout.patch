@@ -23,11 +23,9 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: fix spurious MDIO timeout
  drivers/net/ethernet/mediatek/mtk_eth_soc.c | 21 +++++++++++----------
  1 file changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_eth_soc.c b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-index 43744d2..f840446 100644
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -375,18 +375,19 @@ u64 mtk_r64(struct mtk_eth *eth, unsigned reg)
+@@ -375,18 +375,19 @@ u64 mtk_r64(struct mtk_eth *eth, unsigne
  
  static int mtk_mdio_busy_wait(struct mtk_eth *eth)
  {
@@ -57,6 +55,3 @@ index 43744d2..f840446 100644
  }
  
  static int _mtk_mdio_write_c22(struct mtk_eth *eth, u32 phy_addr, u32 phy_reg,
--- 
-2.45.2
-

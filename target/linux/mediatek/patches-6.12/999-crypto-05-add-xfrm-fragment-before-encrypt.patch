@@ -15,7 +15,7 @@ v1: Add pre-encryption fragmentation for XFRM packet offload
 @@ -427,6 +427,12 @@ bool xfrm_dev_offload_ok(struct sk_buff
  			goto ok;
  	}
-
+ 
 +	if (x->props.family == AF_INET && x->xso.type == XFRM_DEV_OFFLOAD_PACKET) {
 +		skb_gso_reset(skb);
 +		IPCB(skb)->frag_max_size = mtu;
@@ -23,12 +23,12 @@ v1: Add pre-encryption fragmentation for XFRM packet offload
 +			return true;
 +	}
  	return false;
-
+ 
  ok:
 --- a/net/xfrm/xfrm_output.c
 +++ b/net/xfrm/xfrm_output.c
 @@ -583,7 +583,18 @@ out:
-
+ 
  int xfrm_output_resume(struct sock *sk, struct sk_buff *skb, int err)
  {
 -	struct net *net = xs_net(skb_dst(skb)->xfrm);
@@ -44,6 +44,6 @@ v1: Add pre-encryption fragmentation for XFRM packet offload
 +		return -EINVAL;
 +
 +	net = xs_net(dst->xfrm);
-
+ 
  	while (likely((err = xfrm_output_one(skb, err)) == 0)) {
  		nf_reset_ct(skb);

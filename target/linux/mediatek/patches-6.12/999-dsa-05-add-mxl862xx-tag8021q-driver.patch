@@ -19,8 +19,6 @@ Add support for the MXL862xx family of switches offering 4 or 8
 2500M/1000M/100M/10M user ports as well as 1 or 2 USXGMII SerDes
 interfaces.
 
-diff --git a/drivers/net/dsa/Kconfig b/drivers/net/dsa/Kconfig
-index 37a4a0b..cdea3e4 100644
 --- a/drivers/net/dsa/Kconfig
 +++ b/drivers/net/dsa/Kconfig
 @@ -92,6 +92,8 @@ source "drivers/net/dsa/ocelot/Kconfig"
@@ -32,8 +30,6 @@ index 37a4a0b..cdea3e4 100644
  source "drivers/net/dsa/sja1105/Kconfig"
  
  source "drivers/net/dsa/xrs700x/Kconfig"
-diff --git a/drivers/net/dsa/Makefile b/drivers/net/dsa/Makefile
-index b329f0d..85da495 100644
 --- a/drivers/net/dsa/Makefile
 +++ b/drivers/net/dsa/Makefile
 @@ -25,6 +25,7 @@ obj-y				+= b53/
@@ -44,9 +40,6 @@ index b329f0d..85da495 100644
  obj-y				+= ocelot/
  obj-y				+= qca/
  obj-y				+= realtek/
-diff --git a/drivers/net/dsa/mxl862xx/Kconfig b/drivers/net/dsa/mxl862xx/Kconfig
-new file mode 100644
-index 0000000..5b4e051
 --- /dev/null
 +++ b/drivers/net/dsa/mxl862xx/Kconfig
 @@ -0,0 +1,7 @@
@@ -57,18 +50,12 @@ index 0000000..5b4e051
 +	select NET_DSA_TAG_MXL862
 +	help
 +	  This enables support for the MaxLinear MxL862xx switch family.
-diff --git a/drivers/net/dsa/mxl862xx/Makefile b/drivers/net/dsa/mxl862xx/Makefile
-new file mode 100644
-index 0000000..d23dd3c
 --- /dev/null
 +++ b/drivers/net/dsa/mxl862xx/Makefile
 @@ -0,0 +1,3 @@
 +# SPDX-License-Identifier: GPL-2.0
 +obj-$(CONFIG_NET_DSA_MXL862) += mxl862xx_dsa.o
 +mxl862xx_dsa-y := mxl862xx.o mxl862xx-host.o
-diff --git a/drivers/net/dsa/mxl862xx/mxl862xx-api.h b/drivers/net/dsa/mxl862xx/mxl862xx-api.h
-new file mode 100644
-index 0000000..a1f5167
 --- /dev/null
 +++ b/drivers/net/dsa/mxl862xx/mxl862xx-api.h
 @@ -0,0 +1,1501 @@
@@ -1573,9 +1560,6 @@ index 0000000..a1f5167
 +		u8 fc_en;
 +	};
 +};
-diff --git a/drivers/net/dsa/mxl862xx/mxl862xx-cmd.h b/drivers/net/dsa/mxl862xx/mxl862xx-cmd.h
-new file mode 100644
-index 0000000..c20b89d
 --- /dev/null
 +++ b/drivers/net/dsa/mxl862xx/mxl862xx-cmd.h
 @@ -0,0 +1,218 @@
@@ -1797,9 +1781,6 @@ index 0000000..c20b89d
 +#define SYS_MISC_SFP_SET (SYS_MISC_MAGIC + 0x0E)
 +
 +#define MMD_API_MAXIMUM_ID 0x7FFF
-diff --git a/drivers/net/dsa/mxl862xx/mxl862xx-host.c b/drivers/net/dsa/mxl862xx/mxl862xx-host.c
-new file mode 100644
-index 0000000..4d7db56
 --- /dev/null
 +++ b/drivers/net/dsa/mxl862xx/mxl862xx-host.c
 @@ -0,0 +1,279 @@
@@ -2082,18 +2063,12 @@ index 0000000..4d7db56
 +	mutex_unlock(&priv->bus->mdio_lock);
 +	return ret;
 +}
-diff --git a/drivers/net/dsa/mxl862xx/mxl862xx-host.h b/drivers/net/dsa/mxl862xx/mxl862xx-host.h
-new file mode 100644
-index 0000000..0ed0d5f
 --- /dev/null
 +++ b/drivers/net/dsa/mxl862xx/mxl862xx-host.h
 @@ -0,0 +1,3 @@
 +int mxl862xx_write(struct mxl862xx_priv *dev, u32 regaddr, u16 data);
 +extern int mxl862xx_api_wrap(struct mxl862xx_priv *priv, u16 cmd, void *data, u16 size, bool read);
 +
-diff --git a/drivers/net/dsa/mxl862xx/mxl862xx.c b/drivers/net/dsa/mxl862xx/mxl862xx.c
-new file mode 100644
-index 0000000..2251b90
 --- /dev/null
 +++ b/drivers/net/dsa/mxl862xx/mxl862xx.c
 @@ -0,0 +1,3828 @@
@@ -5925,9 +5900,6 @@ index 0000000..2251b90
 +MODULE_DESCRIPTION("Driver for MaxLinear MxL862xx switch family");
 +MODULE_LICENSE("GPL");
 +MODULE_ALIAS("platform:mxl862xx");
-diff --git a/drivers/net/dsa/mxl862xx/mxl862xx.h b/drivers/net/dsa/mxl862xx/mxl862xx.h
-new file mode 100644
-index 0000000..eeb8153
 --- /dev/null
 +++ b/drivers/net/dsa/mxl862xx/mxl862xx.h
 @@ -0,0 +1,110 @@
@@ -6041,6 +6013,3 @@ index 0000000..eeb8153
 +	bool c22_extended;
 +	struct mxl862xx_pcs pcs_port_1;
 +};
--- 
-2.45.2
-

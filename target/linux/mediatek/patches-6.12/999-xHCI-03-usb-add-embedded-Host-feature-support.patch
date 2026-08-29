@@ -20,11 +20,9 @@ Subject: [PATCH 6/6] 999-xHCI-03-usb-add-embedded-Host-feature-support.patch
  drivers/usb/host/xhci-mtk.c        | 4 ++++
  3 files changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/usb/core/hub.c b/drivers/usb/core/hub.c
-index 090b3a757112..3b555b7364a9 100644
 --- a/drivers/usb/core/hub.c
 +++ b/drivers/usb/core/hub.c
-@@ -2552,6 +2552,8 @@ static int usb_enumerate_device(struct usb_device *udev)
+@@ -2552,6 +2552,8 @@ static int usb_enumerate_device(struct u
  			if (err < 0)
  				dev_dbg(&udev->dev, "HNP fail, %d\n", err);
  		}
@@ -33,7 +31,7 @@ index 090b3a757112..3b555b7364a9 100644
  		return -ENOTSUPP;
  	}
  
-@@ -5060,9 +5062,11 @@ hub_port_init(struct usb_hub *hub, struct usb_device *udev, int port1,
+@@ -5060,9 +5062,11 @@ hub_port_init(struct usb_hub *hub, struc
  				goto fail;
  			}
  			if (maxp0 < 0) {
@@ -46,11 +44,9 @@ index 090b3a757112..3b555b7364a9 100644
  				retval = maxp0;
  				continue;
  			}
-diff --git a/drivers/usb/core/otg_productlist.h b/drivers/usb/core/otg_productlist.h
-index db67df29fb2b..ced7b671b234 100644
 --- a/drivers/usb/core/otg_productlist.h
 +++ b/drivers/usb/core/otg_productlist.h
-@@ -35,6 +35,15 @@ static struct usb_device_id productlist_table[] = {
+@@ -35,6 +35,15 @@ static struct usb_device_id productlist_
  { USB_DEVICE(0x0525, 0xa4a0), },
  #endif
  
@@ -66,8 +62,6 @@ index db67df29fb2b..ced7b671b234 100644
  { }	/* Terminating entry */
  };
  
-diff --git a/drivers/usb/host/xhci-mtk.c b/drivers/usb/host/xhci-mtk.c
-index 1a1e05db5be9..5b407ad5a4f0 100644
 --- a/drivers/usb/host/xhci-mtk.c
 +++ b/drivers/usb/host/xhci-mtk.c
 @@ -20,6 +20,7 @@
@@ -78,7 +72,7 @@ index 1a1e05db5be9..5b407ad5a4f0 100644
  
  #include "xhci.h"
  #include "xhci-mtk.h"
-@@ -662,6 +663,7 @@ static int xhci_mtk_probe(struct platform_device *pdev)
+@@ -662,6 +663,7 @@ static int xhci_mtk_probe(struct platfor
  	if (ret)
  		goto disable_device_wakeup;
  
@@ -86,7 +80,7 @@ index 1a1e05db5be9..5b407ad5a4f0 100644
  	if (!xhci_has_one_roothub(xhci)) {
  		xhci->shared_hcd = usb_create_shared_hcd(driver, dev,
  							 dev_name(dev), hcd);
-@@ -669,6 +671,8 @@ static int xhci_mtk_probe(struct platform_device *pdev)
+@@ -669,6 +671,8 @@ static int xhci_mtk_probe(struct platfor
  			ret = -ENOMEM;
  			goto dealloc_usb2_hcd;
  		}
@@ -95,6 +89,3 @@ index 1a1e05db5be9..5b407ad5a4f0 100644
  	}
  
  	usb3_hcd = xhci_get_usb3_hcd(xhci);
--- 
-2.45.2
-

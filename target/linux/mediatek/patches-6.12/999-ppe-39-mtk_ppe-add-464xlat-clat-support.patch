@@ -182,7 +182,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add 464xlat clat support
  	return 0;
  }
  
-@@ -1096,6 +1140,11 @@ void __mtk_ppe_check_skb(struct mtk_ppe
+@@ -1141,6 +1185,11 @@ void __mtk_ppe_check_skb(struct mtk_ppe
  			continue;
  		}
  
@@ -194,7 +194,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add 464xlat clat support
  		entry->hash = hash;
  		__mtk_foe_entry_commit(ppe, &entry->data, hash);
  		found = true;
-@@ -1389,6 +1438,11 @@ void mtk_ppe_start(struct mtk_ppe *ppe)
+@@ -1434,6 +1483,11 @@ void mtk_ppe_start(struct mtk_ppe *ppe)
  	}
  	ppe_w32(ppe, MTK_PPE_GLO_CFG, val);
  

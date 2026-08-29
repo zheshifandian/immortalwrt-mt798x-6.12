@@ -19,8 +19,6 @@ Subject: [PATCH] net: pcs: mtk-lynxi: add autoneg off
  drivers/net/pcs/pcs-mtk-lynxi.c | 43 +++++++++++++++++++++++----------
  1 file changed, 30 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/net/pcs/pcs-mtk-lynxi.c b/drivers/net/pcs/pcs-mtk-lynxi.c
-index cc71a33..0d2c0c0 100644
 --- a/drivers/net/pcs/pcs-mtk-lynxi.c
 +++ b/drivers/net/pcs/pcs-mtk-lynxi.c
 @@ -49,9 +49,9 @@
@@ -36,7 +34,7 @@ index cc71a33..0d2c0c0 100644
  #define SGMII_DUPLEX_HALF		BIT(4)
  #define SGMII_REMOTE_FAULT_DIS		BIT(8)
  #define SGMII_TRXBUF_THR_MASK		GENMASK(31, 16)
-@@ -142,23 +142,40 @@ static void mtk_pcs_lynxi_get_state(struct phylink_pcs *pcs,
+@@ -141,23 +141,40 @@ static void mtk_pcs_lynxi_get_state(stru
  				    struct phylink_link_state *state)
  {
  	struct mtk_pcs_lynxi *mpcs = pcs_to_mtk_pcs_lynxi(pcs);
@@ -85,7 +83,7 @@ index cc71a33..0d2c0c0 100644
  
  	/* Continuously repeat re-configuration sequence until link comes up */
  	if (!state->link) {
-@@ -265,8 +282,8 @@ static int mtk_pcs_lynxi_config(struct phylink_pcs *pcs, unsigned int neg_mode,
+@@ -264,8 +281,8 @@ static int mtk_pcs_lynxi_config(struct p
  	/* Update the sgmsys mode register */
  	regmap_update_bits(mpcs->regmap, SGMSYS_SGMII_MODE,
  			   SGMII_TRXBUF_THR_MASK |
@@ -96,6 +94,3 @@ index cc71a33..0d2c0c0 100644
  			   SGMII_TRXBUF_THR(trxbuf_thr) | sgm_mode);
  
  	/* Update the BMCR */
--- 
-2.45.2
-

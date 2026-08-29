@@ -19,11 +19,9 @@ Without this patch, the QDMA may encounter a data coherence issue on the MT7988D
  drivers/net/ethernet/mediatek/mtk_eth_soc.h | 1 +
  2 files changed, 4 insertions(+)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_eth_soc.c b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-index c13fd2d..33e2410 100644
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -4445,6 +4445,9 @@ static int mtk_start_dma(struct mtk_eth *eth)
+@@ -4475,6 +4475,9 @@ static int mtk_start_dma(struct mtk_eth
  			val |= MTK_MUTLI_CNT | MTK_RESV_BUF |
  			       MTK_WCOMP_EN | MTK_DMAD_WR_WDONE |
  			       MTK_CHK_DDONE_EN;
@@ -33,11 +31,9 @@ index c13fd2d..33e2410 100644
  		} else {
  			val |= MTK_RX_BT_32DWORDS;
  		}
-diff --git a/drivers/net/ethernet/mediatek/mtk_eth_soc.h b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-index 0bb984a..f337da7 100644
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -406,6 +406,7 @@
+@@ -392,6 +392,7 @@
  
  /* QDMA V2 Global Configuration Register */
  #define MTK_CHK_DDONE_EN	BIT(28)
@@ -45,6 +41,3 @@ index 0bb984a..f337da7 100644
  #define MTK_DMAD_WR_WDONE	BIT(26)
  #define MTK_WCOMP_EN		BIT(24)
  #define MTK_RESV_BUF		(0x80 << 16)
--- 
-2.45.2
-

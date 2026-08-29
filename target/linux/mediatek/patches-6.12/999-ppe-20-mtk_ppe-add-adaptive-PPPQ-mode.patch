@@ -32,7 +32,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
 
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -2033,6 +2033,9 @@ mtk_ppe_check_pppq_path(struct mtk_eth *
+@@ -2041,6 +2041,9 @@ mtk_ppe_check_pppq_path(struct mtk_eth *
  		/* Handle cases of GMAC port linked less or equal to 1Gbps */
  		if (odev_speed <= SPEED_1000)
  			return 1;
@@ -44,7 +44,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  	return 0;
 --- a/drivers/net/ethernet/mediatek/mtk_ppe.c
 +++ b/drivers/net/ethernet/mediatek/mtk_ppe.c
-@@ -718,16 +718,29 @@ __mtk_foe_entry_clear(struct mtk_ppe *pp
+@@ -696,16 +696,29 @@ __mtk_foe_entry_clear(struct mtk_ppe *pp
  
  	if (entry->hash != 0xffff && set_state) {
  		struct mtk_foe_entry *hwe = mtk_foe_get_entry(ppe, entry->hash);
@@ -75,7 +75,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  
  	if (entry->type != MTK_FLOW_TYPE_L2_SUBFLOW)
  		return;
-@@ -848,7 +861,8 @@ __mtk_foe_entry_commit(struct mtk_ppe *p
+@@ -826,7 +839,8 @@ __mtk_foe_entry_commit(struct mtk_ppe *p
  	struct mtk_eth *eth = ppe->eth;
  	u16 timestamp = mtk_eth_timestamp(eth);
  	struct mtk_foe_entry *hwe;
@@ -85,7 +85,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  
  	hwe = mtk_foe_get_entry(ppe, hash);
  
-@@ -865,6 +879,21 @@ __mtk_foe_entry_commit(struct mtk_ppe *p
+@@ -843,6 +857,21 @@ __mtk_foe_entry_commit(struct mtk_ppe *p
  					 timestamp);
  	}
  

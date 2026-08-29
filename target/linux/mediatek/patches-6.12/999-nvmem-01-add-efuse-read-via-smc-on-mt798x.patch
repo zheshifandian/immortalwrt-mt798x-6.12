@@ -9,8 +9,6 @@ the offsets it deems public, rejecting any other access.
 v1: Initial reading efuse via SMC implementation on MT798x
 ---
 
-diff --git a/drivers/nvmem/mtk-efuse.c b/drivers/nvmem/mtk-efuse.c
-index 9caf04667341..1a1bba95633d 100644
 --- a/drivers/nvmem/mtk-efuse.c
 +++ b/drivers/nvmem/mtk-efuse.c
 @@ -4,6 +4,7 @@
@@ -95,7 +93,7 @@ index 9caf04667341..1a1bba95633d 100644
  static int mtk_reg_read(void *context,
  			unsigned int reg, void *_val, size_t bytes)
  {
-@@ -74,15 +133,31 @@ static int mtk_efuse_probe(struct platform_device *pdev)
+@@ -74,15 +133,31 @@ static int mtk_efuse_probe(struct platfo
  	if (!priv)
  		return -ENOMEM;
  
@@ -132,7 +130,7 @@ index 9caf04667341..1a1bba95633d 100644
  	econfig.size = resource_size(res);
  	econfig.priv = priv;
  	econfig.dev = dev;
-@@ -109,10 +184,16 @@ static const struct mtk_efuse_pdata mtk_efuse_pdata = {
+@@ -109,10 +184,16 @@ static const struct mtk_efuse_pdata mtk_
  	.uses_post_processing = false,
  };
  
@@ -149,6 +147,3 @@ index 9caf04667341..1a1bba95633d 100644
  	{/* sentinel */},
  };
  MODULE_DEVICE_TABLE(of, mtk_efuse_of_match);
--- 
-2.45.2
-

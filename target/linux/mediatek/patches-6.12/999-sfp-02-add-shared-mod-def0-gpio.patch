@@ -20,8 +20,6 @@ requests within mtk_add_mux().
 
 Signed-off-by: neal.yen <neal.yen@mediatek.com>
 
-diff --git a/drivers/net/phy/sfp.c b/drivers/net/phy/sfp.c
-index 5f4dc0a..43bcc16 100644
 --- a/drivers/net/phy/sfp.c
 +++ b/drivers/net/phy/sfp.c
 @@ -156,7 +156,7 @@ static const char *gpio_names[] = {
@@ -33,7 +31,7 @@ index 5f4dc0a..43bcc16 100644
  	GPIOD_IN,
  	GPIOD_IN,
  	GPIOD_ASIS,
-@@ -597,7 +597,7 @@ static unsigned int sfp_gpio_get_state(struct sfp *sfp)
+@@ -633,7 +633,7 @@ static unsigned int sfp_gpio_get_state(s
  	unsigned int i, state, v;
  
  	for (i = state = 0; i < GPIO_MAX; i++) {
@@ -42,7 +40,7 @@ index 5f4dc0a..43bcc16 100644
  			continue;
  
  		v = gpiod_get_value_cansleep(sfp->gpio[i]);
-@@ -3095,7 +3095,7 @@ static int sfp_probe(struct platform_device *pdev)
+@@ -3132,7 +3132,7 @@ static int sfp_probe(struct platform_dev
  	}
  
  	for (i = 0; i < GPIO_MAX; i++) {
@@ -51,6 +49,3 @@ index 5f4dc0a..43bcc16 100644
  			continue;
  
  		sfp->gpio_irq[i] = gpiod_to_irq(sfp->gpio[i]);
--- 
-2.45.2
-

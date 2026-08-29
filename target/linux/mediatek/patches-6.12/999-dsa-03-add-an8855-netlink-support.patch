@@ -15,8 +15,6 @@ Date: Tue, 21 Oct 2025 16:18:39 +0800
 Subject: [PATCH] net: dsa: add an8855 netlink support for switch app
 
 
-diff --git a/drivers/net/dsa/Makefile b/drivers/net/dsa/Makefile
-index fd740d0..b329f0d 100644
 --- a/drivers/net/dsa/Makefile
 +++ b/drivers/net/dsa/Makefile
 @@ -6,7 +6,8 @@ ifdef CONFIG_NET_DSA_LOOP
@@ -29,8 +27,6 @@ index fd740d0..b329f0d 100644
  obj-$(CONFIG_NET_DSA_LANTIQ_GSWIP) += lantiq_gswip.o
  obj-$(CONFIG_NET_DSA_MT7530)    += mt7530-dsa.o
  mt7530-dsa-objs                 := mt7530.o mt7530_nl.o
-diff --git a/drivers/net/dsa/an8855.c b/drivers/net/dsa/an8855.c
-index e6666d2..c184b84 100644
 --- a/drivers/net/dsa/an8855.c
 +++ b/drivers/net/dsa/an8855.c
 @@ -10,15 +10,24 @@
@@ -58,7 +54,7 @@ index e6666d2..c184b84 100644
  
  static const struct an8855_mib_desc an8855_mib[] = {
  	MIB_DESC(1, AN8855_PORT_MIB_TX_DROP, "TxDrop"),
-@@ -128,6 +137,65 @@ static int an8855_fdb_cmd(struct an8855_priv *priv, u32 cmd,
+@@ -128,6 +137,65 @@ static int an8855_fdb_cmd(struct an8855_
  	return 0;
  }
  
@@ -124,7 +120,7 @@ index e6666d2..c184b84 100644
  static void
  an8855_port_stp_state_set(struct dsa_switch *ds, int port, u8 state)
  {
-@@ -2152,6 +2220,41 @@ static void an8855_pcs_an_restart(struct phylink_pcs *pcs)
+@@ -2152,6 +2220,41 @@ static void an8855_pcs_an_restart(struct
  	return;
  }
  
@@ -166,7 +162,7 @@ index e6666d2..c184b84 100644
  static const struct phylink_pcs_ops an8855_pcs_ops = {
  	.pcs_inband_caps = an8855_pcs_inband_caps,
  	.pcs_get_state = an8855_pcs_get_state,
-@@ -2275,7 +2378,22 @@ static int an8855_switch_probe(struct platform_device *pdev)
+@@ -2275,7 +2378,22 @@ static int an8855_switch_probe(struct pl
  
  	dev_set_drvdata(priv->dev, priv);
  
@@ -190,7 +186,7 @@ index e6666d2..c184b84 100644
  }
  
  static void an8855_switch_remove(struct platform_device *pdev)
-@@ -2284,6 +2402,8 @@ static void an8855_switch_remove(struct platform_device *pdev)
+@@ -2284,6 +2402,8 @@ static void an8855_switch_remove(struct
  
  	if (priv)
  		dsa_unregister_switch(priv->ds);
@@ -199,8 +195,6 @@ index e6666d2..c184b84 100644
  }
  
  static const struct of_device_id an8855_switch_of_match[] = {
-diff --git a/drivers/net/dsa/an8855.h b/drivers/net/dsa/an8855.h
-index 2462b9d..47bfea7 100644
 --- a/drivers/net/dsa/an8855.h
 +++ b/drivers/net/dsa/an8855.h
 @@ -780,4 +780,13 @@ struct an8855_priv {
@@ -217,9 +211,6 @@ index 2462b9d..47bfea7 100644
 +	u16 val);
 +
  #endif /* __AN8855_H */
-diff --git a/drivers/net/dsa/an8855_nl.c b/drivers/net/dsa/an8855_nl.c
-new file mode 100644
-index 0000000..ad4845e
 --- /dev/null
 +++ b/drivers/net/dsa/an8855_nl.c
 @@ -0,0 +1,318 @@
@@ -541,9 +532,6 @@ index 0000000..ad4845e
 +	an8855_sw_priv = NULL;
 +	genl_unregister_family(&an8855_nl_family);
 +}
-diff --git a/drivers/net/dsa/an8855_nl.h b/drivers/net/dsa/an8855_nl.h
-new file mode 100644
-index 0000000..f8a462d
 --- /dev/null
 +++ b/drivers/net/dsa/an8855_nl.h
 @@ -0,0 +1,43 @@
@@ -590,6 +578,3 @@ index 0000000..f8a462d
 +#endif /* __KERNEL__ */
 +
 +#endif /* _AN8855_NL_H_ */
--- 
-2.45.2
-

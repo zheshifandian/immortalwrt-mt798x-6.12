@@ -27,7 +27,7 @@ NETSYSv3 or greater, and 0 for older generations.
 
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -1911,12 +1911,12 @@ static inline u32 mtk_get_ib1_ppoe_mask(
+@@ -1914,12 +1914,12 @@ static inline u32 mtk_get_ib1_ppoe_mask(
  	return MTK_FOE_IB1_BIND_PPPOE;
  }
  

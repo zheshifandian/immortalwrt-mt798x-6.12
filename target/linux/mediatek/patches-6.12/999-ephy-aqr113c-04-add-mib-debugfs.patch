@@ -35,8 +35,6 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  4 files changed, 189 insertions(+), 1 deletion(-)
  create mode 100755 drivers/net/phy/aquantia/aquantia_mib.c
 
-diff --git a/drivers/net/phy/aquantia/Makefile b/drivers/net/phy/aquantia/Makefile
-index c6c4d49..fc44429 100644
 --- a/drivers/net/phy/aquantia/Makefile
 +++ b/drivers/net/phy/aquantia/Makefile
 @@ -1,5 +1,5 @@
@@ -46,11 +44,9 @@ index c6c4d49..fc44429 100644
  ifdef CONFIG_HWMON
  aquantia-objs			+= aquantia_hwmon.o
  endif
-diff --git a/drivers/net/phy/aquantia/aquantia.h b/drivers/net/phy/aquantia/aquantia.h
-index e2bb66a..e3bc9ef 100644
 --- a/drivers/net/phy/aquantia/aquantia.h
 +++ b/drivers/net/phy/aquantia/aquantia.h
-@@ -174,10 +174,25 @@ static const struct aqr107_hw_stat aqr107_hw_stats[] = {
+@@ -174,10 +174,25 @@ static const struct aqr107_hw_stat aqr10
  
  #define AQR107_SGMII_STAT_SZ ARRAY_SIZE(aqr107_hw_stats)
  
@@ -76,7 +72,7 @@ index e2bb66a..e3bc9ef 100644
  };
  
  #if IS_REACHABLE(CONFIG_HWMON)
-@@ -186,6 +201,8 @@ int aqr_hwmon_probe(struct phy_device *phydev);
+@@ -186,6 +201,8 @@ int aqr_hwmon_probe(struct phy_device *p
  static inline int aqr_hwmon_probe(struct phy_device *phydev) { return 0; }
  #endif
  
@@ -85,11 +81,9 @@ index e2bb66a..e3bc9ef 100644
  int aqr_firmware_load(struct phy_device *phydev);
  
  int aqr_phy_led_blink_set(struct phy_device *phydev, u8 index,
-diff --git a/drivers/net/phy/aquantia/aquantia_main.c b/drivers/net/phy/aquantia/aquantia_main.c
-index 972fa89..6ce86da 100644
 --- a/drivers/net/phy/aquantia/aquantia_main.c
 +++ b/drivers/net/phy/aquantia/aquantia_main.c
-@@ -965,6 +965,10 @@ static int aqr107_probe(struct phy_device *phydev)
+@@ -935,6 +935,10 @@ static int aqr107_probe(struct phy_devic
  	if (ret)
  		return ret;
  
@@ -100,9 +94,6 @@ index 972fa89..6ce86da 100644
  	return aqr_hwmon_probe(phydev);
  }
  
-diff --git a/drivers/net/phy/aquantia/aquantia_mib.c b/drivers/net/phy/aquantia/aquantia_mib.c
-new file mode 100755
-index 0000000..99c5237
 --- /dev/null
 +++ b/drivers/net/phy/aquantia/aquantia_mib.c
 @@ -0,0 +1,167 @@
@@ -273,6 +264,3 @@ index 0000000..99c5237
 +
 +	return 0;
 +}
--- 
-2.45.2
-
