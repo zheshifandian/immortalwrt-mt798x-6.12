@@ -55,10 +55,11 @@ export function handler_load(path, cb)
 		chdir(prev_dir);
 		f.seek();
 		while (true) {
-			let data = f.read("line");
-			if (data == null || data == "")
+			let line = f.read("line");
+			if (!line)
 				break;
 
+			let data = trim(line);
 			try {
 				data = json(trim(data));
 			} catch (e) {
@@ -103,6 +104,26 @@ export function parse_attribute_list(data, spec)
 	}
 
 	return ret;
+};
+
+export function sorted_json(value) {
+	let t = type(value);
+
+	if (t == "object") {
+		let parts = [];
+		for (let key in sort(keys(value)))
+			push(parts, sprintf("%J", key) + ":" + sorted_json(value[key]));
+		return "{" + join(",", parts) + "}";
+	}
+
+	if (t == "array") {
+		let parts = [];
+		for (let item in value)
+			push(parts, sorted_json(item));
+		return "[" + join(",", parts) + "]";
+	}
+
+	return sprintf("%J", value);
 };
 
 export function is_equal(val1, val2) {
