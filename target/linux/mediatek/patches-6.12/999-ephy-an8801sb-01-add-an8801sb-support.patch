@@ -22,8 +22,6 @@ Driver Version: v1.1.9
  create mode 100644 drivers/net/phy/an8801.c
  create mode 100644 drivers/net/phy/an8801.h
 
-diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-index 2682c7b..9d28148 100644
 --- a/drivers/net/phy/Kconfig
 +++ b/drivers/net/phy/Kconfig
 @@ -165,6 +165,11 @@ config AS21XXX_PHY
@@ -38,8 +36,6 @@ index 2682c7b..9d28148 100644
  config AIROHA_EN8801SC_PHY
  	tristate "Airoha EN8801SC Gigabit PHY"
  	help
-diff --git a/drivers/net/phy/Makefile b/drivers/net/phy/Makefile
-index d75b8fa..4521ff7 100644
 --- a/drivers/net/phy/Makefile
 +++ b/drivers/net/phy/Makefile
 @@ -50,6 +50,7 @@ obj-y				+= $(sfp-obj-y) $(sfp-obj-m)
@@ -50,9 +46,6 @@ index d75b8fa..4521ff7 100644
  obj-$(CONFIG_AIROHA_EN8801SC_PHY)   += en8801sc.o
  obj-$(CONFIG_AIR_AN8855_PHY)		+= air_an8855.o
  obj-$(CONFIG_AIR_EN8811H_PHY)   += air_en8811h.o
-diff --git a/drivers/net/phy/an8801.c b/drivers/net/phy/an8801.c
-new file mode 100644
-index 0000000..66f880e
 --- /dev/null
 +++ b/drivers/net/phy/an8801.c
 @@ -0,0 +1,1555 @@
@@ -1611,9 +1604,6 @@ index 0000000..66f880e
 +};
 +
 +MODULE_DEVICE_TABLE(mdio, airoha_tbl);
-diff --git a/drivers/net/phy/an8801.h b/drivers/net/phy/an8801.h
-new file mode 100644
-index 0000000..6e68477
 --- /dev/null
 +++ b/drivers/net/phy/an8801.h
 @@ -0,0 +1,235 @@
@@ -1852,5 +1842,3 @@ index 0000000..6e68477
 +};
 +
 +#endif /* End of __AN8801_H */
--- 
-2.45.2

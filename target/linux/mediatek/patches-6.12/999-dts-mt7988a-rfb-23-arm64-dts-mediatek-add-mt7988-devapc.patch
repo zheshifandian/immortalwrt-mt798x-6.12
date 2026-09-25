@@ -7,11 +7,9 @@ violates the access permission control (APC) configured by system.
 v1: Add MT7988 device APC
 ---
 
-diff --git a/arch/arm64/boot/dts/mediatek/mt7988a.dtsi b/arch/arm64/boot/dts/mediatek/mt7988a.dtsi
-index 3cf1bb793fc2..7af909565b31 100644
 --- a/arch/arm64/boot/dts/mediatek/mt7988a.dtsi
 +++ b/arch/arm64/boot/dts/mediatek/mt7988a.dtsi
-@@ -1408,6 +1408,12 @@ crypto: crypto@15600000 {
+@@ -1393,6 +1393,12 @@
  			status = "okay";
  			eth = <&eth>;
  		};
@@ -24,6 +22,3 @@ index 3cf1bb793fc2..7af909565b31 100644
  	};
  
  	thermal-zones {
--- 
-2.45.2
-

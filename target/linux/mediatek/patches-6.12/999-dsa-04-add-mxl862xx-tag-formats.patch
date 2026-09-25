@@ -18,8 +18,6 @@ The MaxLinear MXL862xx family of switches can either be used with a
 VLANs to destinguish user ports. 
 Add support for both tag formats.
 
-diff --git a/include/net/dsa.h b/include/net/dsa.h
-index 6f2a397..5ccd598 100644
 --- a/include/net/dsa.h
 +++ b/include/net/dsa.h
 @@ -55,6 +55,8 @@ struct tc_action;
@@ -40,8 +38,6 @@ index 6f2a397..5ccd598 100644
  };
  
  struct dsa_switch;
-diff --git a/net/dsa/Kconfig b/net/dsa/Kconfig
-index 869cbe5..a05fe9c 100644
 --- a/net/dsa/Kconfig
 +++ b/net/dsa/Kconfig
 @@ -137,6 +137,19 @@ config NET_DSA_TAG_QCA
@@ -64,11 +60,9 @@ index 869cbe5..a05fe9c 100644
  config NET_DSA_TAG_RTL4_A
  	tristate "Tag driver for Realtek 4 byte protocol A tags"
  	help
-diff --git a/net/dsa/Makefile b/net/dsa/Makefile
-index 555c07c..7e774e2 100644
 --- a/net/dsa/Makefile
 +++ b/net/dsa/Makefile
-@@ -28,6 +28,8 @@ obj-$(CONFIG_NET_DSA_TAG_HELLCREEK) += tag_hellcreek.o
+@@ -28,6 +28,8 @@ obj-$(CONFIG_NET_DSA_TAG_HELLCREEK) += t
  obj-$(CONFIG_NET_DSA_TAG_KSZ) += tag_ksz.o
  obj-$(CONFIG_NET_DSA_TAG_LAN9303) += tag_lan9303.o
  obj-$(CONFIG_NET_DSA_TAG_MTK) += tag_mtk.o
@@ -77,9 +71,6 @@ index 555c07c..7e774e2 100644
  obj-$(CONFIG_NET_DSA_TAG_NONE) += tag_none.o
  obj-$(CONFIG_NET_DSA_TAG_OCELOT) += tag_ocelot.o
  obj-$(CONFIG_NET_DSA_TAG_OCELOT_8021Q) += tag_ocelot_8021q.o
-diff --git a/net/dsa/tag_mxl862xx.c b/net/dsa/tag_mxl862xx.c
-new file mode 100644
-index 0000000..b07116e
 --- /dev/null
 +++ b/net/dsa/tag_mxl862xx.c
 @@ -0,0 +1,165 @@
@@ -248,9 +239,6 @@ index 0000000..b07116e
 +MODULE_ALIAS_DSA_TAG_DRIVER(DSA_TAG_PROTO_MXL862, MXL862_TAG_NAME);
 +module_dsa_tag_driver(mxl862_netdev_ops);
 +
-diff --git a/net/dsa/tag_mxl862xx_8021q.c b/net/dsa/tag_mxl862xx_8021q.c
-new file mode 100644
-index 0000000..e761034
 --- /dev/null
 +++ b/net/dsa/tag_mxl862xx_8021q.c
 @@ -0,0 +1,92 @@
@@ -346,6 +334,3 @@ index 0000000..e761034
 +MODULE_LICENSE("GPL");
 +MODULE_ALIAS_DSA_TAG_DRIVER(DSA_TAG_PROTO_MXL862_8021Q, MXL862_TAG_8021Q_NAME);
 +module_dsa_tag_driver(mxl862_8021q_netdev_ops);
--- 
-2.45.2
-

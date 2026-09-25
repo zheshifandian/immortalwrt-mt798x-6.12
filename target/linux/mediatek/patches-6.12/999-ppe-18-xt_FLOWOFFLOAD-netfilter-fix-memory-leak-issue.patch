@@ -39,7 +39,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  	}
  
  	return 0;
-@@ -757,6 +759,9 @@ flowoffload_tg(struct sk_buff *skb, cons
+@@ -754,6 +756,9 @@ flowoffload_tg(struct sk_buff *skb, cons
  	xt_flowoffload_check_device(table, devs[0]);
  	xt_flowoffload_check_device(table, devs[1]);
  

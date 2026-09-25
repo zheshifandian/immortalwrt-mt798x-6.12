@@ -47,7 +47,7 @@ v1: Align driver files with OpenWrt 24.10.
  struct mtk_socphy_shared {
  	u32			boottrap;
  	struct mtk_socphy_priv	priv[4];
-@@ -926,6 +936,11 @@ static void mt7988_phy_finetune(struct p
+@@ -887,6 +897,11 @@ static void mt7988_phy_finetune(struct p
  	for (i = 0; i < 12; i++)
  		phy_write_mmd(phydev, MDIO_MMD_VEND1, i, val[i]);
  
@@ -59,7 +59,7 @@ v1: Align driver files with OpenWrt 24.10.
  	/* TCT finetune */
  	phy_write_mmd(phydev, MDIO_MMD_VEND1, MTK_PHY_RG_TX_FILTER, 0x5);
  
-@@ -936,19 +951,15 @@ static void mt7988_phy_finetune(struct p
+@@ -897,19 +912,15 @@ static void mt7988_phy_finetune(struct p
  
  	/* VgaDecRate is 1 at default on mt7988 */
  
@@ -82,8 +82,8 @@ v1: Align driver files with OpenWrt 24.10.
 +
  	/* TR_OPEN_LOOP_EN = 1, lpf_x_average = 10 */
  	phy_modify_mmd(phydev, MDIO_MMD_VEND1, MTK_PHY_RG_DEV1E_REG234,
- 		       MTK_PHY_TR_OPEN_LOOP_EN_MASK |
-@@ -957,6 +968,63 @@ static void mt7988_phy_finetune(struct p
+ 		       MTK_PHY_TR_OPEN_LOOP_EN_MASK | MTK_PHY_LPF_X_AVERAGE_MASK,
+@@ -917,6 +928,63 @@ static void mt7988_phy_finetune(struct p
  
  	/* rg_tr_lpf_cnt_val = 1023 */
  	phy_write_mmd(phydev, MDIO_MMD_VEND1, MTK_PHY_RG_LPF_CNT_VAL, 0x3ff);
@@ -147,7 +147,7 @@ v1: Align driver files with OpenWrt 24.10.
  }
  
  static void mt798x_phy_eee(struct phy_device *phydev)
-@@ -1203,6 +1271,7 @@ static int mt798x_phy_config_init(struct
+@@ -1161,6 +1229,7 @@ static int mt798x_phy_config_init(struct
  		break;
  	case MTK_GPHY_ID_MT7988:
  		mt7988_phy_finetune(phydev);
@@ -155,7 +155,7 @@ v1: Align driver files with OpenWrt 24.10.
  		break;
  	}
  
-@@ -1216,6 +1285,7 @@ static int mt798x_phy_led_blink_set(stru
+@@ -1174,6 +1243,7 @@ static int mt798x_phy_led_blink_set(stru
  				    unsigned long *delay_on,
  				    unsigned long *delay_off)
  {
@@ -163,7 +163,7 @@ v1: Align driver files with OpenWrt 24.10.
  	bool blinking = false;
  	int err;
  
-@@ -1223,25 +1293,27 @@ static int mt798x_phy_led_blink_set(stru
+@@ -1181,25 +1251,27 @@ static int mt798x_phy_led_blink_set(stru
  	if (err < 0)
  		return err;
  
@@ -196,8 +196,8 @@ v1: Align driver files with OpenWrt 24.10.
 +				     MTK_GPHY_LED_ON_MASK, (value != LED_OFF));
  }
  
- static const unsigned long supported_triggers =
-@@ -1264,7 +1336,9 @@ static int mt798x_phy_led_hw_is_supporte
+ static const unsigned long supported_triggers = (BIT(TRIGGER_NETDEV_FULL_DUPLEX) |
+@@ -1221,7 +1293,9 @@ static int mt798x_phy_led_hw_is_supporte
  static int mt798x_phy_led_hw_control_get(struct phy_device *phydev, u8 index,
  					 unsigned long *rules)
  {
@@ -208,7 +208,7 @@ v1: Align driver files with OpenWrt 24.10.
  				       MTK_GPHY_LED_ON_SET,
  				       MTK_GPHY_LED_RX_BLINK_SET,
  				       MTK_GPHY_LED_TX_BLINK_SET);
-@@ -1273,7 +1347,9 @@ static int mt798x_phy_led_hw_control_get
+@@ -1230,7 +1304,9 @@ static int mt798x_phy_led_hw_control_get
  static int mt798x_phy_led_hw_control_set(struct phy_device *phydev, u8 index,
  					 unsigned long rules)
  {
@@ -219,7 +219,7 @@ v1: Align driver files with OpenWrt 24.10.
  				       MTK_GPHY_LED_ON_SET,
  				       MTK_GPHY_LED_RX_BLINK_SET,
  				       MTK_GPHY_LED_TX_BLINK_SET);
-@@ -1386,6 +1462,7 @@ static int mt7988_phy_probe(struct phy_d
+@@ -1342,6 +1418,7 @@ static int mt7988_phy_probe(struct phy_d
  	 * 1. Meet common mode compliance test criteria
  	 * 2. Make sure that TX-VCM calibration works fine
  	 */

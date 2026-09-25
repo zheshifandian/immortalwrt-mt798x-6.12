@@ -19,11 +19,9 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  drivers/net/phy/phylink.c | 28 ++++++++++++++++++----------
  1 file changed, 18 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/net/phy/phylink.c b/drivers/net/phy/phylink.c
-index 80aec3f..6059fe6 100644
 --- a/drivers/net/phy/phylink.c
 +++ b/drivers/net/phy/phylink.c
-@@ -3943,27 +3943,35 @@ void phylink_mii_c22_pcs_decode_state(struct phylink_link_state *state,
+@@ -3934,27 +3934,35 @@ void phylink_mii_c22_pcs_decode_state(st
  	if (!state->link)
  		return;
  
@@ -69,6 +67,3 @@ index 80aec3f..6059fe6 100644
  		break;
  
  	default:
--- 
-2.45.2
-

@@ -18,11 +18,9 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  drivers/net/phy/phylink.c | 22 ++++++++++++++++------
  1 file changed, 16 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/net/phy/phylink.c b/drivers/net/phy/phylink.c
-index 1614314..1266c64 100644
 --- a/drivers/net/phy/phylink.c
 +++ b/drivers/net/phy/phylink.c
-@@ -1507,12 +1507,24 @@ static int phylink_change_inband_advert(struct phylink *pl)
+@@ -1507,12 +1507,24 @@ static int phylink_change_inband_advert(
  static void phylink_mac_pcs_get_state(struct phylink *pl,
  				      struct phylink_link_state *state)
  {
@@ -49,7 +47,7 @@ index 1614314..1266c64 100644
  		state->speed = SPEED_UNKNOWN;
  		state->duplex = DUPLEX_UNKNOWN;
  		state->pause = MLO_PAUSE_NONE;
-@@ -1521,11 +1533,9 @@ static void phylink_mac_pcs_get_state(struct phylink *pl,
+@@ -1521,11 +1533,9 @@ static void phylink_mac_pcs_get_state(st
  		state->duplex = pl->link_config.duplex;
  		state->pause = pl->link_config.pause;
  	}
@@ -63,6 +61,3 @@ index 1614314..1266c64 100644
  	else
  		state->link = 0;
  }
--- 
-2.45.2
-
