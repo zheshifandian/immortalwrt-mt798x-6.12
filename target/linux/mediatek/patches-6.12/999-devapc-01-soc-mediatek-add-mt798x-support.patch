@@ -18,8 +18,6 @@ Subject: [PATCH] soc: mediatek: mtk-devapc: add mt798x support
  drivers/soc/mediatek/mtk-devapc.c | 150 +++++++++++++++++++++++++++---
  1 file changed, 139 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/soc/mediatek/mtk-devapc.c b/drivers/soc/mediatek/mtk-devapc.c
-index f54c966138b5..7256834e37a5 100644
 --- a/drivers/soc/mediatek/mtk-devapc.c
 +++ b/drivers/soc/mediatek/mtk-devapc.c
 @@ -3,6 +3,7 @@
@@ -86,7 +84,7 @@ index f54c966138b5..7256834e37a5 100644
  	const struct mtk_devapc_regs_ofs *regs_ofs;
  };
  
-@@ -154,13 +178,9 @@ static int devapc_sync_vio_dbg(struct mtk_devapc_context *ctx)
+@@ -154,13 +178,9 @@ static int devapc_sync_vio_dbg(struct mt
  	return true;
  }
  
@@ -102,7 +100,7 @@ index f54c966138b5..7256834e37a5 100644
  	void __iomem *vio_dbg0_reg;
  	void __iomem *vio_dbg1_reg;
  
-@@ -181,6 +201,46 @@ static void devapc_extract_vio_dbg(struct mtk_devapc_context *ctx)
+@@ -181,6 +201,46 @@ static void devapc_extract_vio_dbg(struc
  		 vio_dbgs.vio_dbg1);
  }
  
@@ -149,7 +147,7 @@ index f54c966138b5..7256834e37a5 100644
  /*
   * devapc_violation_irq - the devapc Interrupt Service Routine (ISR) will dump
   *                        violation information including which master violates
-@@ -229,16 +289,58 @@ static const struct mtk_devapc_regs_ofs devapc_regs_ofs_mt6779 = {
+@@ -229,16 +289,58 @@ static const struct mtk_devapc_regs_ofs
  	.vio_shift_con_offset = 0xF20,
  };
  
@@ -208,11 +206,10 @@ index f54c966138b5..7256834e37a5 100644
  static const struct of_device_id mtk_devapc_dt_match[] = {
  	{
  		.compatible = "mediatek,mt6779-devapc",
-@@ -246,6 +348,18 @@ static const struct of_device_id mtk_devapc_dt_match[] = {
- 	}, {
+@@ -247,6 +349,18 @@ static const struct of_device_id mtk_dev
  		.compatible = "mediatek,mt8186-devapc",
  		.data = &devapc_mt8186,
-+	}, {
+ 	}, {
 +		.compatible = "mediatek,mt7981-devapc",
 +		.data = &devapc_mt7981,
 +	}, {
@@ -224,10 +221,11 @@ index f54c966138b5..7256834e37a5 100644
 +	}, {
 +		.compatible = "mediatek,mt7988-devapc",
 +		.data = &devapc_mt7988,
- 	}, {
++	}, {
  	},
  };
-@@ -255,6 +369,7 @@ static int mtk_devapc_probe(struct platform_device *pdev)
+ MODULE_DEVICE_TABLE(of, mtk_devapc_dt_match);
+@@ -255,6 +369,7 @@ static int mtk_devapc_probe(struct platf
  {
  	struct device_node *node = pdev->dev.of_node;
  	struct mtk_devapc_context *ctx;
@@ -235,7 +233,7 @@ index f54c966138b5..7256834e37a5 100644
  	u32 devapc_irq;
  	int ret;
  
-@@ -268,6 +383,17 @@ static int mtk_devapc_probe(struct platform_device *pdev)
+@@ -268,6 +383,17 @@ static int mtk_devapc_probe(struct platf
  	ctx->data = of_device_get_match_data(&pdev->dev);
  	ctx->dev = &pdev->dev;
  
@@ -253,7 +251,7 @@ index f54c966138b5..7256834e37a5 100644
  	ctx->infra_base = of_iomap(node, 0);
  	if (!ctx->infra_base)
  		return -EINVAL;
-@@ -278,10 +404,12 @@ static int mtk_devapc_probe(struct platform_device *pdev)
+@@ -278,10 +404,12 @@ static int mtk_devapc_probe(struct platf
  		goto err;
  	}
  
@@ -270,6 +268,3 @@ index f54c966138b5..7256834e37a5 100644
  	}
  
  	ret = devm_request_irq(&pdev->dev, devapc_irq, devapc_violation_irq,
--- 
-2.45.2
-

@@ -55,7 +55,7 @@ v2: Add tunnel over IPSec hardware offload support
  			/* DEV_PATH_VLAN and DEV_PATH_PPPOE */
  			if (info->num_encaps >= NF_FLOW_TABLE_ENCAP_MAX) {
  				info->indev = NULL;
-@@ -386,6 +399,8 @@ static int nft_dev_forward_path(const st
+@@ -381,6 +394,8 @@ static int nft_dev_forward_path(const st
  		route->tuple[dir].out.hw_ifindex = info.hw_outdev->ifindex;
  		route->tuple[dir].xmit_type = info.xmit_type;
  	}
@@ -64,7 +64,7 @@ v2: Add tunnel over IPSec hardware offload support
  
  	return 0;
  }
-@@ -686,6 +701,8 @@ err_flow_alloc:
+@@ -681,6 +696,8 @@ err_flow_alloc:
  	dst_release(route.tuple[dir].dst);
  	dst_release(route.tuple[!dir].dst);
  err_flow_route:

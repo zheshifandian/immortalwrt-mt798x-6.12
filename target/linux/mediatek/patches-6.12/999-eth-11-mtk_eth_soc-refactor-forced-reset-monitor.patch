@@ -63,7 +63,7 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: refactor forced reset monitor
  	}
  }
  
-@@ -3784,7 +3787,7 @@ static void mtk_dma_free(struct mtk_eth
+@@ -3783,7 +3786,7 @@ static void mtk_dma_free(struct mtk_eth
  
  static bool mtk_hw_reset_check(struct mtk_eth *eth)
  {
@@ -72,7 +72,7 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: refactor forced reset monitor
  
  	return (val & MTK_FE_INT_FQ_EMPTY) || (val & MTK_FE_INT_RFIFO_UF) ||
  	       (val & MTK_FE_INT_RFIFO_OV) || (val & MTK_FE_INT_TSO_FAIL) ||
-@@ -4613,81 +4616,230 @@ static void mtk_hw_warm_reset(struct mtk
+@@ -4624,81 +4627,230 @@ static void mtk_hw_warm_reset(struct mtk
  			val, rst_mask);
  }
  

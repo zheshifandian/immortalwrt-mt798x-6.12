@@ -21,11 +21,9 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  drivers/net/phy/aquantia/aquantia_main.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/net/phy/aquantia/aquantia_main.c b/drivers/net/phy/aquantia/aquantia_main.c
-index 1bc1d5c..217095c 100644
 --- a/drivers/net/phy/aquantia/aquantia_main.c
 +++ b/drivers/net/phy/aquantia/aquantia_main.c
-@@ -843,7 +843,7 @@ static int aqr113c_fill_interface_modes(struct phy_device *phydev)
+@@ -843,7 +843,7 @@ static int aqr113c_fill_interface_modes(
  	 */
  	ret = phy_read_mmd_poll_timeout(phydev, MDIO_MMD_VEND1,
  					VEND1_GLOBAL_CFG_100M, val, val != 0,
@@ -34,5 +32,3 @@ index 1bc1d5c..217095c 100644
  	if (ret)
  		return ret;
  
--- 
-2.45.2

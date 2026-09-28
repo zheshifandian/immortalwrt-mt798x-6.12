@@ -13,7 +13,7 @@ v1: Move openwrt-master files to openwrt-25.12 branch after OpenWrt official
 @@ -16,6 +16,14 @@
  	#address-cells = <2>;
  	#size-cells = <2>;
-
+ 
 +       firmware {
 +                optee {
 +                        status = "okay";
@@ -25,4 +25,3 @@ v1: Move openwrt-master files to openwrt-25.12 branch after OpenWrt official
  	cci: cci {
  		compatible = "mediatek,mt8183-cci";
  		clocks = <&mcusys CLK_MCU_BUS_DIV_SEL>,
-

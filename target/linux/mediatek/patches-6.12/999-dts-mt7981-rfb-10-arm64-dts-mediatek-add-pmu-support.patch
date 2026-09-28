@@ -8,14 +8,12 @@ driver with GIC_PPI 7 interrupt, following the same configuration as MT7987.
 v1: Add PMU support for MT7981b to enable perf hardware events monitoring.
 ---
 
-Index: kernel/arch/arm64/boot/dts/mediatek/mt7981b.dtsi
-===================================================================
---- kernel.orig/arch/arm64/boot/dts/mediatek/mt7981b.dtsi
-+++ kernel/arch/arm64/boot/dts/mediatek/mt7981b.dtsi
+--- a/arch/arm64/boot/dts/mediatek/mt7981b.dtsi
++++ b/arch/arm64/boot/dts/mediatek/mt7981b.dtsi
 @@ -56,6 +56,12 @@
  		method = "smc";
  	};
-
+ 
 +	pmu {
 +		compatible = "arm,cortex-a53-pmu";
 +		interrupt-parent = <&gic>;

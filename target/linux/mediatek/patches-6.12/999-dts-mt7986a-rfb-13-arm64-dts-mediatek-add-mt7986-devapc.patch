@@ -7,11 +7,9 @@ violates the access permission control (APC) configured by system.
 v1: Add MT7986 device APC
 ---
 
-diff --git a/arch/arm64/boot/dts/mediatek/mt7986a.dtsi b/arch/arm64/boot/dts/mediatek/mt7986a.dtsi
-index 270176911a99..121cc4cf1419 100644
 --- a/arch/arm64/boot/dts/mediatek/mt7986a.dtsi
 +++ b/arch/arm64/boot/dts/mediatek/mt7986a.dtsi
-@@ -642,6 +642,12 @@ wifi: wifi@18000000 {
+@@ -651,6 +651,12 @@
  				     <GIC_SPI 216 IRQ_TYPE_LEVEL_HIGH>;
  			memory-region = <&wmcpu_emi>;
  		};
@@ -24,6 +22,3 @@ index 270176911a99..121cc4cf1419 100644
  	};
  
  	thermal-zones {
--- 
-2.45.2
-

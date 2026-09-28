@@ -43,8 +43,6 @@ Signed-off-by: Sami Tolvanen <samitolvanen@google.com>
  scripts/sign-file.c | 66 +++------------------------------------------
  1 file changed, 3 insertions(+), 63 deletions(-)
 
-diff --git a/scripts/sign-file.c b/scripts/sign-file.c
-index 7070245edfc1..16f2bf2e1e3c 100644
 --- a/scripts/sign-file.c
 +++ b/scripts/sign-file.c
 @@ -24,6 +24,7 @@
@@ -194,6 +192,3 @@ index 7070245edfc1..16f2bf2e1e3c 100644
  	} else {
  		BIO *b;
  
--- 
-2.45.2
-
