@@ -236,7 +236,7 @@ define DownloadMethod/rawgit
 	cd $(TMP_DIR)/dl && \
 	rm -rf $(SUBDIR) && \
 	[ \! -d $(SUBDIR) ] && \
-	git clone --filter=blob:none $(OPTS) $(URL) $(SUBDIR) && \
+	git clone $(OPTS) $(URL) $(SUBDIR) && \
 	(cd $(SUBDIR) && git checkout $(SOURCE_VERSION)) && \
 	export TAR_TIMESTAMP=`cd $(SUBDIR) && git log -1 --no-show-signature --format='@%ct'` && \
 	echo "Generating formal git archive (apply .gitattributes rules)" && \
