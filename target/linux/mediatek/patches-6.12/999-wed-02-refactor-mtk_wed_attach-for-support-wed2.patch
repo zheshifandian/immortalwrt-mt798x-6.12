@@ -10,11 +10,9 @@ pcie2 => wed2
  drivers/net/ethernet/mediatek/mtk_wed.c | 6 ++----
  1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_wed.c b/drivers/net/ethernet/mediatek/mtk_wed.c
-index 8774c99..bac4a95 100644
 --- a/drivers/net/ethernet/mediatek/mtk_wed.c
 +++ b/drivers/net/ethernet/mediatek/mtk_wed.c
-@@ -618,7 +618,7 @@ mtk_wed_amsdu_init(struct mtk_wed_device *dev)
+@@ -618,7 +618,7 @@ mtk_wed_amsdu_init(struct mtk_wed_device
  
  	/* init partial amsdu offload txd src */
  	wed_set(dev, MTK_WED_AMSDU_HIFTXD_CFG,
@@ -23,7 +21,7 @@ index 8774c99..bac4a95 100644
  
  	/* init qmem */
  	wed_set(dev, MTK_WED_AMSDU_PSE, MTK_WED_AMSDU_PSE_RESET);
-@@ -2424,9 +2424,7 @@ mtk_wed_attach(struct mtk_wed_device *dev)
+@@ -2424,9 +2424,7 @@ mtk_wed_attach(struct mtk_wed_device *de
  	RCU_LOCKDEP_WARN(!rcu_read_lock_held(),
  			 "mtk_wed_attach without holding the RCU read lock");
  
@@ -34,6 +32,3 @@ index 8774c99..bac4a95 100644
  		ret = -ENODEV;
  
  	rcu_read_unlock();
--- 
-2.45.2
-

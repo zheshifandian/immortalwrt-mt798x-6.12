@@ -28,7 +28,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
 
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -1775,6 +1775,7 @@ struct mtk_eth {
+@@ -1801,6 +1801,7 @@ struct mtk_eth {
  
  	struct metadata_dst		*dsa_meta[MTK_MAX_DSA_PORTS];
  
@@ -36,7 +36,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  	u8				l4s_toggle;
  	struct mtk_ppe			*ppe[3];
  	struct rhashtable		flow_table;
-@@ -1987,6 +1988,62 @@ static inline u32 mtk_get_ib2_multicast_
+@@ -2015,6 +2016,62 @@ static inline u32 mtk_get_ib2_multicast_
  	return MTK_FOE_IB2_MULTICAST;
  }
  
@@ -227,7 +227,9 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  #include <net/dsa.h>
  #include "mtk_eth_soc.h"
  #include "mtk_wed.h"
-@@ -189,13 +191,27 @@ mtk_flow_get_dsa_port(struct net_device
+@@ -187,15 +189,29 @@ mtk_flow_get_dsa_port(struct net_device
+ #endif
+ }
  
 +/* struct nf_conn::mark only exists with CONFIG_NF_CONNTRACK_MARK */
 +static inline u32 mtk_flow_get_ct_mark(const struct nf_conn *ct)
@@ -257,7 +259,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  		mtk_foe_entry_set_wdma(eth, foe, info.wdma_idx, info.queue,
  				       info.bss, info.wcid, info.amsdu);
  		if (mtk_is_netsys_v2_or_greater(eth)) {
-@@ -219,13 +225,13 @@ mtk_flow_set_output_device(struct mtk_et
+@@ -219,13 +235,13 @@ mtk_flow_set_output_device(struct mtk_et
  		goto out;
  	}
  
@@ -275,7 +277,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  		pse_port = PSE_GDM3_PORT;
  	else
  		return -EOPNOTSUPP;
-@@ -234,9 +240,32 @@ mtk_flow_set_output_device(struct mtk_et
+@@ -234,9 +250,32 @@ mtk_flow_set_output_device(struct mtk_et
  		mtk_foe_entry_set_dsa(eth, foe, dsa_port);
  		queue = 3 + dsa_port;
  	} else {
@@ -310,7 +312,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  
  out:
  	mtk_foe_entry_set_pse_port(eth, foe, pse_port);
-@@ -480,8 +509,8 @@ mtk_flow_offload_replace(struct mtk_eth
+@@ -480,8 +519,8 @@ mtk_flow_offload_replace(struct mtk_eth
  	if (data.pppoe.num == 1)
  		mtk_foe_entry_set_pppoe(eth, &foe, data.pppoe.sid);
  

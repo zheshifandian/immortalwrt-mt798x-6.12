@@ -12,11 +12,9 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  drivers/net/phy/phylink.c | 9 ++++++++++
  1 file changed, 9 insertions(+)
 
-diff --git a/drivers/net/phy/phylink.c b/drivers/net/phy/phylink.c
-index 6059fe6..17265c7 100644
 --- a/drivers/net/phy/phylink.c
 +++ b/drivers/net/phy/phylink.c
-@@ -3852,6 +3852,15 @@ static void phylink_decode_sgmii_word(struct phylink_link_state *state,
+@@ -4227,6 +4227,15 @@ static void phylink_decode_sgmii_word(st
  void phylink_decode_usxgmii_word(struct phylink_link_state *state,
  				 uint16_t lpa)
  {
@@ -32,6 +30,3 @@ index 6059fe6..17265c7 100644
  	switch (lpa & MDIO_USXGMII_SPD_MASK) {
  	case MDIO_USXGMII_10:
  		state->speed = SPEED_10;
--- 
-2.45.2
-

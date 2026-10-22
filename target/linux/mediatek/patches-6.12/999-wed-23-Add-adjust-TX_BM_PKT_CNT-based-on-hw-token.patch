@@ -8,8 +8,6 @@ Signed-off-by: Rex Lu <rex.lu@mediatek.com>
  drivers/net/ethernet/mediatek/mtk_wed.c | 14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_wed.c b/drivers/net/ethernet/mediatek/mtk_wed.c
-index f157a99..dd7d5ce 100644
 --- a/drivers/net/ethernet/mediatek/mtk_wed.c
 +++ b/drivers/net/ethernet/mediatek/mtk_wed.c
 @@ -46,8 +46,8 @@
@@ -23,7 +21,7 @@ index f157a99..dd7d5ce 100644
  
  static struct mtk_wed_hw *hw_list[3];
  static DEFINE_MUTEX(hw_lock);
-@@ -687,9 +687,9 @@ mtk_wed_tx_buffer_alloc(struct mtk_wed_device *dev)
+@@ -687,9 +687,9 @@ mtk_wed_tx_buffer_alloc(struct mtk_wed_d
  	} else {
  		dev->tx_buf_ring.size = MTK_WED_TX_BM_DMA_SIZE;
  		if (mtk_wed_is_v3_1(dev->hw))
@@ -35,7 +33,7 @@ index f157a99..dd7d5ce 100644
  	}
  	n_pages = dev->tx_buf_ring.size / MTK_WED_BUF_PER_PAGE;
  
-@@ -1731,14 +1731,14 @@ mtk_wed_hw_init(struct mtk_wed_device *dev)
+@@ -1731,14 +1731,14 @@ mtk_wed_hw_init(struct mtk_wed_device *d
  			MTK_WED_TX_TKID_CTRL_FREE_FORMAT);
  
  		wed_w32(dev, MTK_WED_TX_BM_INIT_PTR,
@@ -53,6 +51,3 @@ index f157a99..dd7d5ce 100644
  			MTK_WED_TX_BM_INIT_SW_TAIL_IDX);
  	}
  
--- 
-2.45.2
-

@@ -13,12 +13,12 @@ v1: Initial IRQ support for MT7988 internal 2.5G Ethernet PHY.
 @@ -7,6 +7,8 @@
  /dts-v1/;
  /plugin/;
-
+ 
 +#include <dt-bindings/interrupt-controller/arm-gic.h>
 +
  / {
  	compatible = "mediatek,mt7988a-rfb", "mediatek,mt7988a";
-
+ 
 @@ -25,6 +27,8 @@
  		__overlay__ {
  			pinctrl-names = "i2p5gbe-led";

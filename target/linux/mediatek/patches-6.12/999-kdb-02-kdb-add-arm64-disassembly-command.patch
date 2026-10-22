@@ -17,8 +17,6 @@ Add the dis command for inspecting ARM64 instructions from KDB.
 Signed-off-by: Evan Zhang <Evan.Zhang@mediatek.com>
 ---
 
-diff --git a/kernel/debug/kdb/Makefile b/kernel/debug/kdb/Makefile
-index efac857..02e395f 100644
 --- a/kernel/debug/kdb/Makefile
 +++ b/kernel/debug/kdb/Makefile
 @@ -6,7 +6,7 @@
@@ -30,9 +28,6 @@ index efac857..02e395f 100644
  obj-$(CONFIG_KDB_KEYBOARD)    += kdb_keyboard.o
  
  clean-files := gen-kdb_cmds.c
-diff --git a/kernel/debug/kdb/kdb_dis.c b/kernel/debug/kdb/kdb_dis.c
-new file mode 100644
-index 0000000..d9e06ef
 --- /dev/null
 +++ b/kernel/debug/kdb/kdb_dis.c
 @@ -0,0 +1,841 @@
@@ -877,5 +872,3 @@ index 0000000..d9e06ef
 +	return 0;
 +}
 +early_initcall(kdb_dis_init);
--- 
-2.45.2

@@ -66,7 +66,7 @@
  		}
  
  		if (unlikely(mac < 0 || mac >= MTK_MAX_DEVS ||
-@@ -2988,6 +3006,12 @@ static int mtk_poll_rx(struct napi_struc
+@@ -2996,6 +3014,12 @@ static int mtk_poll_rx(struct napi_struc
  				trace_printk("[%s] reason=0x%x(force to CPU) from WAN to Ext\n",
  					     __func__, skb_hnat_reason(skb));
  				skb->pkt_type = PACKET_HOST;
@@ -79,7 +79,7 @@
  			}
  
  			/* With slow path rate limit enabled, packets take
-@@ -3068,6 +3092,12 @@ static int mtk_poll_rx(struct napi_struc
+@@ -3076,6 +3100,12 @@ static int mtk_poll_rx(struct napi_struc
  			mtk_eth_debugfs_hwlro_flush_stats_update(eth, ring->ring_no, &trxd);
  		}
  

@@ -20,8 +20,6 @@ on mxl862xx SerDes port1
  drivers/net/dsa/mxl862xx/mxl862xx.h |  16 ++
  2 files changed, 250 insertions(+)
 
-diff --git a/drivers/net/dsa/mxl862xx/mxl862xx.c b/drivers/net/dsa/mxl862xx/mxl862xx.c
-index af6c0d7..9495328 100644
 --- a/drivers/net/dsa/mxl862xx/mxl862xx.c
 +++ b/drivers/net/dsa/mxl862xx/mxl862xx.c
 @@ -10,11 +10,13 @@
@@ -38,7 +36,7 @@ index af6c0d7..9495328 100644
  #include <linux/phy.h>
  #include <net/dsa.h>
  #include <linux/dsa/8021q.h>
-@@ -3712,11 +3714,220 @@ static const struct dsa_switch_ops mxl862xx_switch_ops = {
+@@ -3713,11 +3715,220 @@ static const struct dsa_switch_ops mxl86
  	.setup = mxl862xx_setup,
  };
  
@@ -259,7 +257,7 @@ index af6c0d7..9495328 100644
  	struct dsa_switch *ds;
  	int ret;
  
-@@ -3782,6 +3993,28 @@ static int mxl862xx_probe(struct mdio_device *mdiodev)
+@@ -3783,6 +3994,28 @@ static int mxl862xx_probe(struct mdio_de
  		dev_info(dev, "%s:%u: Enable force isolate", __func__, __LINE__);
  	}
  
@@ -288,7 +286,7 @@ index af6c0d7..9495328 100644
  	return 0;
  }
  
-@@ -3789,6 +4022,7 @@ static void mxl862xx_remove(struct mdio_device *mdiodev)
+@@ -3790,6 +4023,7 @@ static void mxl862xx_remove(struct mdio_
  {
  	struct dsa_switch *ds = dev_get_drvdata(&mdiodev->dev);
  
@@ -296,8 +294,6 @@ index af6c0d7..9495328 100644
  	dsa_unregister_switch(ds);
  }
  
-diff --git a/drivers/net/dsa/mxl862xx/mxl862xx.h b/drivers/net/dsa/mxl862xx/mxl862xx.h
-index eeb8153..afa02a5 100644
 --- a/drivers/net/dsa/mxl862xx/mxl862xx.h
 +++ b/drivers/net/dsa/mxl862xx/mxl862xx.h
 @@ -87,6 +87,21 @@ struct mxl862xx_pcs {
@@ -328,6 +324,3 @@ index eeb8153..afa02a5 100644
  	struct mxl862xx_pcs pcs_port_1;
 +	struct combo_port_mux *ds_mux[MAX_PORTS];
  };
--- 
-2.45.2
-
