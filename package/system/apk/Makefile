@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=apk
-PKG_RELEASE:=3
+PKG_RELEASE:=4
 
 PKG_SOURCE_URL=https://gitlab.alpinelinux.org/alpine/apk-tools.git
 PKG_SOURCE_PROTO:=git
@@ -35,17 +35,17 @@ define Package/apk-mbedtls
   $(Package/apk/default)
   TITLE += (mbedtls)
   DEPENDS +=+libmbedtls
+  DEFAULT:=y if USE_APK
   VARIANT:=mbedtls
+  DEFAULT_VARIANT:=1
+  CONFLICTS:=apk-openssl
 endef
 
 define Package/apk-openssl
   $(Package/apk/default)
   TITLE += (openssl)
   DEPENDS +=+libopenssl
-  DEFAULT:=y if USE_APK
   VARIANT:=openssl
-  DEFAULT_VARIANT:=1
-  CONFLICTS:=apk-mbedtls
 endef
 
 MESON_HOST_VARS+=VERSION=$(PKG_VERSION)

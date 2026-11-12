@@ -16,6 +16,7 @@ PKG_HASH:=9931f9860d18e6cf72d183eb8f309bfb96196c00e1d40caa978e95bc9aa978b6
 PKG_SOURCE_URL:=https://github.com/libexpat/libexpat/releases/download/R_$(subst .,_,$(PKG_VERSION))
 
 HOST_BUILD_PARALLEL:=1
+HOST_CONFIGURE_CACHE:=1
 
 include $(INCLUDE_DIR)/host-build.mk
 
