@@ -3531,6 +3531,7 @@ int mtk_sw_nat_hook_rx(struct sk_buff *skb)
 	skb_hnat_set_cdrt(skb, 0);
 	skb_hnat_set_is_pppoe(skb, 0);
 	skb_hnat_set_is_decrypt(skb, 0);
+	skb_hnat_set_ppe_id(skb, 0);
 	skb_hnat_magic_tag(skb) = HNAT_MAGIC_TAG;
 
 	if (skb_hnat_iface(skb) == FOE_MAGIC_WED0)
@@ -4079,6 +4080,17 @@ static unsigned int mtk_hnat_nf_post_routing(
 		}
 
 		skb_to_hnat_info(skb, out, entry, &hw_path);
+		break;
+	case UN_HIT:
+		/* All 4 ways of the bucket are occupied, PPE reports the last way */
+		if (!hnat_priv->hash_collision_en ||
+		    (skb_hnat_entry(skb) & 0x3) != 0x3)
+			break;
+
+		if (fn && !mtk_hnat_accel_type(skb))
+			break;
+
+		atomic64_inc(&hnat_priv->hash_collision_cnt[skb_hnat_ppe(skb)]);
 		break;
 	case HIT_BIND_KEEPALIVE_DUP_OLD_HDR:
 		/* update hnat count to virtual interface/nf_conntrack by keepalive */

@@ -1107,6 +1107,8 @@ struct mtk_hnat {
 	struct hlist_head *foe_flow[MAX_PPE_NUM];
 	struct hnat_prot_3t_cfg prot_3t[MAX_PPE_NUM]; /* for 3-tuple offload */
 	struct hnat_neigh_update neigh_update;
+	atomic64_t hash_collision_cnt[MAX_PPE_NUM];
+	bool hash_collision_en;
 	int fe_irq2;
 };
 
@@ -1469,31 +1471,6 @@ static inline bool hnat_dsa_is_enable(struct mtk_hnat *priv)
 #else
 	return false;
 #endif
-}
-
-static inline u32 skb_hnat_ppe(const struct sk_buff *skb)
-{
-	struct mtk_eth *eth = hnat_priv->eth;
-	int gmac_id;
-
-	switch (skb_hnat_sport(skb)) {
-	case NR_GMAC1_PORT:
-		gmac_id = MTK_GMAC1_ID;
-		break;
-	case NR_GMAC2_PORT:
-		gmac_id = MTK_GMAC2_ID;
-		break;
-	case NR_GMAC3_PORT:
-		gmac_id = MTK_GMAC3_ID;
-		break;
-	default:
-		return 0;
-	}
-
-	if (!eth || !eth->mac[gmac_id])
-		return 0;
-
-	return eth->mac[gmac_id]->ppe_idx;
 }
 
 struct foe_entry *hnat_get_foe_entry(u32 ppe_id, u32 index);

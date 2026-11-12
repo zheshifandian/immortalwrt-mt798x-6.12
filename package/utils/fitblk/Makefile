@@ -12,7 +12,6 @@ PKG_FLAGS:=nonshared
 include $(INCLUDE_DIR)/package.mk
 
 define Package/fitblk
-  HIDDEN:=1
   SECTION:=base
   CATEGORY:=Base system
   TITLE:=fitblk firmware release tool
