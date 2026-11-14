@@ -21,7 +21,7 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: revise xgmac force mode
 
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -784,10 +784,9 @@ static void mtk_mac_link_down(struct phy
+@@ -785,10 +785,9 @@ static void mtk_mac_link_down(struct phy
  
  	if (!mtk_interface_mode_is_xgmii(interface)) {
  		mtk_m32(mac->hw, MAC_MCR_TX_EN | MAC_MCR_RX_EN | MAC_MCR_FORCE_LINK, 0, MTK_MAC_MCR(mac->id));
@@ -33,7 +33,7 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: revise xgmac force mode
  	}
  }
  
-@@ -943,7 +942,7 @@ static void mtk_xgdm_mac_link_up(struct
+@@ -944,7 +943,7 @@ static void mtk_xgdm_mac_link_up(struct
  				 unsigned int mode, phy_interface_t interface,
  				 int speed, int duplex, bool tx_pause, bool rx_pause)
  {
@@ -42,7 +42,7 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: revise xgmac force mode
  
  	if (mac->id == MTK_GMAC1_ID)
  		return;
-@@ -953,10 +952,8 @@ static void mtk_xgdm_mac_link_up(struct
+@@ -954,10 +953,8 @@ static void mtk_xgdm_mac_link_up(struct
  	mdelay(20);
  	mtk_m32(mac->hw, XMAC_GLB_CNTCLR, XMAC_GLB_CNTCLR, MTK_XMAC_CNT_CTRL(mac->id));
  
@@ -55,7 +55,7 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: revise xgmac force mode
  
  	mcr = mtk_r32(mac->hw, MTK_XMAC_MCR(mac->id));
  	mcr &= ~(XMAC_MCR_FORCE_TX_FC | XMAC_MCR_FORCE_RX_FC | XMAC_MCR_TRX_DISABLE);
-@@ -4410,12 +4407,25 @@ static int mtk_hw_init(struct mtk_eth *e
+@@ -4455,12 +4452,25 @@ static int mtk_hw_init(struct mtk_eth *e
  	for (i = 0; i < MTK_MAX_DEVS; i++) {
  		struct net_device *dev = eth->netdev[i];
  
@@ -86,7 +86,7 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: revise xgmac force mode
  	/* Indicates CDM to parse the MTK special tag from CPU
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -442,7 +442,8 @@
+@@ -444,7 +444,8 @@
  
  /* XMAC status registers */
  #define MTK_XGMAC_STS(x)	(((x) == MTK_GMAC3_ID) ? 0x1001C : 0x1000C)

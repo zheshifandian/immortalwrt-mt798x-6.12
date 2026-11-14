@@ -9,8 +9,6 @@ further analysis.
 v1: Initial MT798x EMI MPU driver implementation
 ---
 
-diff --git a/drivers/soc/mediatek/Kconfig b/drivers/soc/mediatek/Kconfig
-index 1b7afb19ccd6..d1844c6a9652 100644
 --- a/drivers/soc/mediatek/Kconfig
 +++ b/drivers/soc/mediatek/Kconfig
 @@ -78,4 +78,13 @@ config MTK_SOCINFO
@@ -27,8 +25,6 @@ index 1b7afb19ccd6..d1844c6a9652 100644
 +	  countermeasures.
 +
  endmenu
-diff --git a/drivers/soc/mediatek/Makefile b/drivers/soc/mediatek/Makefile
-index 6830512848fd..61b737685cb7 100644
 --- a/drivers/soc/mediatek/Makefile
 +++ b/drivers/soc/mediatek/Makefile
 @@ -8,3 +8,4 @@ obj-$(CONFIG_MTK_MMSYS) += mtk-mmsys.o
@@ -36,9 +32,6 @@ index 6830512848fd..61b737685cb7 100644
  obj-$(CONFIG_MTK_SVS) += mtk-svs.o
  obj-$(CONFIG_MTK_SOCINFO) += mtk-socinfo.o
 +obj-$(CONFIG_MTK_EMIMPU) += mtk-emimpu.o
-diff --git a/drivers/soc/mediatek/mtk-emimpu.c b/drivers/soc/mediatek/mtk-emimpu.c
-new file mode 100644
-index 000000000000..e47f0f7d09e8
 --- /dev/null
 +++ b/drivers/soc/mediatek/mtk-emimpu.c
 @@ -0,0 +1,207 @@
@@ -249,6 +242,3 @@ index 000000000000..e47f0f7d09e8
 +
 +MODULE_DESCRIPTION("Mediatek EMI MPU Driver");
 +MODULE_LICENSE("GPL");
--- 
-2.45.2
-

@@ -18,11 +18,9 @@ Subject: [PATCH] dts: mediatek: add mt7981 pdma interrupts for rss and hwlro
  arch/arm64/boot/dts/mediatek/mt7981b.dtsi | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm64/boot/dts/mediatek/mt7981b.dtsi b/arch/arm64/boot/dts/mediatek/mt7981b.dtsi
-index 372160c..e53b62a 100644
 --- a/arch/arm64/boot/dts/mediatek/mt7981b.dtsi
 +++ b/arch/arm64/boot/dts/mediatek/mt7981b.dtsi
-@@ -440,7 +440,11 @@ eth: ethernet@15100000 {
+@@ -439,7 +439,11 @@
  			reg = <0 0x15100000 0 0x80000>;
  			#address-cells = <1>;
  			#size-cells = <0>;
@@ -35,6 +33,3 @@ index 372160c..e53b62a 100644
  				     <GIC_SPI 197 IRQ_TYPE_LEVEL_HIGH>,
  				     <GIC_SPI 198 IRQ_TYPE_LEVEL_HIGH>,
  				     <GIC_SPI 199 IRQ_TYPE_LEVEL_HIGH>;
--- 
-2.45.2
-

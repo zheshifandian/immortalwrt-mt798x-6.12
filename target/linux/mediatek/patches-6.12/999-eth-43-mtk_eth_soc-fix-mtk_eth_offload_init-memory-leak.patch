@@ -20,7 +20,7 @@ Subject: [PATCH] net: ethernet: mtk_eth_soc: fix mtk_eth_offload_init memory
 
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -7131,12 +7131,12 @@ static int mtk_probe(struct platform_dev
+@@ -7186,12 +7186,12 @@ static int mtk_probe(struct platform_dev
  				err = -ENOMEM;
  				goto err_deinit_ppe;
  			}

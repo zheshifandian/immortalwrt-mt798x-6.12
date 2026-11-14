@@ -11,11 +11,9 @@ v1: Move openwrt-master files to openwrt-25.12 branch after OpenWrt official
     25.12 branch release.
 ---
 
-diff --git a/drivers/clk/mediatek/clk-mt7981-infracfg.c b/drivers/clk/mediatek/clk-mt7981-infracfg.c
-index 0487b6bb8..4c1f72aea 100644
 --- a/drivers/clk/mediatek/clk-mt7981-infracfg.c
 +++ b/drivers/clk/mediatek/clk-mt7981-infracfg.c
-@@ -98,6 +98,22 @@ static const struct mtk_gate_regs infra2_cg_regs = {
+@@ -98,6 +98,22 @@ static const struct mtk_gate_regs infra2
  	.sta_ofs = 0x68,
  };
  
@@ -38,7 +36,7 @@ index 0487b6bb8..4c1f72aea 100644
  #define GATE_INFRA0(_id, _name, _parent, _shift)                               \
  	{                                                                      \
  		.id = _id, .name = _name, .parent_name = _parent,              \
-@@ -137,8 +153,8 @@ static const struct mtk_gate infra_clks[] = {
+@@ -137,8 +153,8 @@ static const struct mtk_gate infra_clks[
  		    14),
  	GATE_INFRA0(CLK_INFRA_DBG_CK, "infra_dbg", "infra_66m_mck", 15),
  	GATE_INFRA0(CLK_INFRA_AP_DMA_CK, "infra_ap_dma", "infra_66m_mck", 16),
@@ -49,6 +47,3 @@ index 0487b6bb8..4c1f72aea 100644
  	GATE_INFRA0(CLK_INFRA_PWM3_CK, "infra_pwm3", "infra_pwm3_sel", 27),
  	/* INFRA1 */
  	GATE_INFRA1(CLK_INFRA_THERM_CK, "infra_therm", "csw_f26m_sel", 0),
--- 
-2.45.2
-

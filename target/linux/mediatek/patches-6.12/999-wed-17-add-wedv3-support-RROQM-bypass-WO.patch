@@ -18,11 +18,9 @@ Signed-off-by: Rex Lu <rex.lu@mediatek.com>
  drivers/net/ethernet/mediatek/mtk_wed_regs.h | 3 +++
  2 files changed, 12 insertions(+)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_wed.c b/drivers/net/ethernet/mediatek/mtk_wed.c
-index a09e5d5..50d6ef0 100644
 --- a/drivers/net/ethernet/mediatek/mtk_wed.c
 +++ b/drivers/net/ethernet/mediatek/mtk_wed.c
-@@ -1565,6 +1565,10 @@ mtk_wed_rro_hw_init(struct mtk_wed_device *dev)
+@@ -1578,6 +1578,10 @@ mtk_wed_rro_hw_init(struct mtk_wed_devic
  
  	wed_w32(dev, MTK_WED_RROQM_RST_IDX, 0);
  	wed_w32(dev, MTK_WED_RROQM_MIOD_CTRL2, MTK_WED_MIOD_CNT - 1);
@@ -33,7 +31,7 @@ index a09e5d5..50d6ef0 100644
  	wed_set(dev, MTK_WED_CTRL, MTK_WED_CTRL_RX_RRO_QM_EN);
  }
  
-@@ -1592,6 +1596,11 @@ mtk_wed_route_qm_hw_init(struct mtk_wed_device *dev)
+@@ -1605,6 +1609,11 @@ mtk_wed_route_qm_hw_init(struct mtk_wed_
  			FIELD_PREP(MTK_WED_RTQM_ENQ_CFG_TXDMAD_FPORT,
  				   0x3 + dev->hw->index));
  	}
@@ -45,8 +43,6 @@ index a09e5d5..50d6ef0 100644
  	/* enable RX_ROUTE_QM */
  	wed_set(dev, MTK_WED_CTRL, MTK_WED_CTRL_RX_ROUTE_QM_EN);
  }
-diff --git a/drivers/net/ethernet/mediatek/mtk_wed_regs.h b/drivers/net/ethernet/mediatek/mtk_wed_regs.h
-index 54c5333..0421956 100644
 --- a/drivers/net/ethernet/mediatek/mtk_wed_regs.h
 +++ b/drivers/net/ethernet/mediatek/mtk_wed_regs.h
 @@ -578,6 +578,8 @@ struct mtk_wdma_desc {
@@ -66,5 +62,3 @@ index 54c5333..0421956 100644
  #define MTK_WED_RROQM_RST_IDX				0xc08
  #define MTK_WED_RROQM_RST_IDX_MIOD			BIT(0)
  #define MTK_WED_RROQM_RST_IDX_FDBK			BIT(4)
--- 
-2.45.2
