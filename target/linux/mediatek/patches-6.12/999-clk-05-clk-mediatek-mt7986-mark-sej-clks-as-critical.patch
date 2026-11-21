@@ -10,11 +10,9 @@ v1: Move openwrt-master files to openwrt-25.12 branch after OpenWrt official
     25.12 branch release.
 ---
 
-diff --git a/drivers/clk/mediatek/clk-mt7986-infracfg.c b/drivers/clk/mediatek/clk-mt7986-infracfg.c
-index 732c65e61..a4e0ebbcf 100644
 --- a/drivers/clk/mediatek/clk-mt7986-infracfg.c
 +++ b/drivers/clk/mediatek/clk-mt7986-infracfg.c
-@@ -85,6 +85,22 @@ static const struct mtk_gate_regs infra2_cg_regs = {
+@@ -85,6 +85,22 @@ static const struct mtk_gate_regs infra2
  	.sta_ofs = 0x68,
  };
  
@@ -37,7 +35,7 @@ index 732c65e61..a4e0ebbcf 100644
  #define GATE_INFRA0(_id, _name, _parent, _shift)			\
  	GATE_MTK(_id, _name, _parent, &infra0_cg_regs, _shift, &mtk_clk_gate_ops_setclr)
  
-@@ -112,8 +128,8 @@ static const struct mtk_gate infra_clks[] = {
+@@ -112,8 +128,8 @@ static const struct mtk_gate infra_clks[
  		    14),
  	GATE_INFRA0(CLK_INFRA_DBG_CK, "infra_dbg", "infra_sysaxi_d2", 15),
  	GATE_INFRA0(CLK_INFRA_AP_DMA_CK, "infra_ap_dma", "infra_sysaxi_d2", 16),
@@ -48,6 +46,3 @@ index 732c65e61..a4e0ebbcf 100644
  	GATE_INFRA0(CLK_INFRA_TRNG_CK, "infra_trng", "sysaxi_sel", 26),
  	/* INFRA1 */
  	GATE_INFRA1(CLK_INFRA_THERM_CK, "infra_therm", "csw_f26m_sel", 0),
--- 
-2.45.2
-

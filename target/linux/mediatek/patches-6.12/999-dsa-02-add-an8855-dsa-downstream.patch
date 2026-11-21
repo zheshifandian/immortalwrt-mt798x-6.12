@@ -20,8 +20,6 @@ Subject: [PATCH] net: dsa: add AN8855 dsa downstream driver to v2.0.3
  drivers/net/phy/air_an8855.c   |  12 +-
  5 files changed, 741 insertions(+), 116 deletions(-)
 
-diff --git a/drivers/mfd/airoha-an8855.c b/drivers/mfd/airoha-an8855.c
-index eeaea34..9ef1150 100644
 --- a/drivers/mfd/airoha-an8855.c
 +++ b/drivers/mfd/airoha-an8855.c
 @@ -10,6 +10,9 @@
@@ -34,7 +32,7 @@ index eeaea34..9ef1150 100644
  static const struct mfd_cell an8855_mfd_devs[] = {
  	{
  		.name = "an8855-efuse",
-@@ -70,7 +73,7 @@ static int an8855_mii_read32(struct mii_bus *bus, u8 phy_id, u32 reg,
+@@ -70,7 +73,7 @@ static int an8855_mii_read32(struct mii_
  		goto err;
  	}
  
@@ -43,7 +41,7 @@ index eeaea34..9ef1150 100644
  
  	return 0;
  err:
-@@ -245,10 +248,13 @@ static int an8855_mfd_probe(struct mdio_device *mdiodev)
+@@ -245,10 +248,13 @@ static int an8855_mfd_probe(struct mdio_
  	/* no DMA for mdiobus, mute warning for DMA mask not set */
  	priv->dev->dma_mask = &priv->dev->coherent_dma_mask;
  
@@ -58,8 +56,6 @@ index eeaea34..9ef1150 100644
  			      "regmap initialization failed\n");
  
  	dev_set_drvdata(&mdiodev->dev, priv);
-diff --git a/drivers/net/dsa/an8855.c b/drivers/net/dsa/an8855.c
-index e6666d2..004a10f 100644
 --- a/drivers/net/dsa/an8855.c
 +++ b/drivers/net/dsa/an8855.c
 @@ -20,6 +20,55 @@
@@ -118,7 +114,7 @@ index e6666d2..004a10f 100644
  static const struct an8855_mib_desc an8855_mib[] = {
  	MIB_DESC(1, AN8855_PORT_MIB_TX_DROP, "TxDrop"),
  	MIB_DESC(1, AN8855_PORT_MIB_TX_CRC_ERR, "TxCrcErr"),
-@@ -61,6 +110,7 @@ static void an8855_fdb_write(struct an8855_priv *priv, u16 vid,
+@@ -61,6 +110,7 @@ static void an8855_fdb_write(struct an88
  {
  	u32 mac_reg[2] = { };
  	u32 reg;
@@ -126,7 +122,7 @@ index e6666d2..004a10f 100644
  
  	mac_reg[0] |= FIELD_PREP(AN8855_ATA1_MAC0, mac[0]);
  	mac_reg[0] |= FIELD_PREP(AN8855_ATA1_MAC1, mac[1]);
-@@ -69,25 +119,40 @@ static void an8855_fdb_write(struct an8855_priv *priv, u16 vid,
+@@ -69,25 +119,40 @@ static void an8855_fdb_write(struct an88
  	mac_reg[1] |= FIELD_PREP(AN8855_ATA2_MAC4, mac[4]);
  	mac_reg[1] |= FIELD_PREP(AN8855_ATA2_MAC5, mac[5]);
  
@@ -171,7 +167,7 @@ index e6666d2..004a10f 100644
  
  	fdb->live = FIELD_GET(AN8855_ATRD0_LIVE, reg[0]);
  	fdb->type = FIELD_GET(AN8855_ATRD0_TYPE, reg[0]);
-@@ -135,6 +200,7 @@ an8855_port_stp_state_set(struct dsa_switch *ds, int port, u8 state)
+@@ -135,6 +200,7 @@ an8855_port_stp_state_set(struct dsa_swi
  	struct an8855_priv *priv = ds->priv;
  	bool learning = false;
  	u32 stp_state;
@@ -179,7 +175,7 @@ index e6666d2..004a10f 100644
  
  	switch (state) {
  	case BR_STATE_DISABLED:
-@@ -158,12 +224,18 @@ an8855_port_stp_state_set(struct dsa_switch *ds, int port, u8 state)
+@@ -158,12 +224,18 @@ an8855_port_stp_state_set(struct dsa_swi
  		break;
  	}
  
@@ -200,7 +196,7 @@ index e6666d2..004a10f 100644
  }
  
  static void an8855_port_fast_age(struct dsa_switch *ds, int port)
-@@ -173,18 +245,24 @@ static void an8855_port_fast_age(struct dsa_switch *ds, int port)
+@@ -173,18 +245,24 @@ static void an8855_port_fast_age(struct
  
  	/* Set to clean Dynamic entry */
  	ret = regmap_write(priv->regmap, AN8855_ATA2, AN8855_ATA2_TYPE);
@@ -228,7 +224,7 @@ index e6666d2..004a10f 100644
  }
  
  static int an8855_update_port_member(struct dsa_switch *ds, int port,
-@@ -340,17 +418,24 @@ static void an8855_port_bridge_leave(struct dsa_switch *ds, int port,
+@@ -340,17 +418,24 @@ static void an8855_port_bridge_leave(str
  				     struct dsa_bridge bridge)
  {
  	struct an8855_priv *priv = ds->priv;
@@ -255,7 +251,7 @@ index e6666d2..004a10f 100644
  }
  
  static int an8855_port_fdb_add(struct dsa_switch *ds, int port,
-@@ -361,7 +446,7 @@ static int an8855_port_fdb_add(struct dsa_switch *ds, int port,
+@@ -361,7 +446,7 @@ static int an8855_port_fdb_add(struct ds
  	u8 port_mask = BIT(port);
  	int ret;
  
@@ -264,7 +260,7 @@ index e6666d2..004a10f 100644
  	if (!vid)
  		vid = AN8855_PORT_VID_DEFAULT;
  
-@@ -381,7 +466,7 @@ static int an8855_port_fdb_del(struct dsa_switch *ds, int port,
+@@ -381,7 +466,7 @@ static int an8855_port_fdb_del(struct ds
  	u8 port_mask = BIT(port);
  	int ret;
  
@@ -273,7 +269,7 @@ index e6666d2..004a10f 100644
  	if (!vid)
  		vid = AN8855_PORT_VID_DEFAULT;
  
-@@ -398,7 +483,7 @@ static int an8855_port_fdb_dump(struct dsa_switch *ds, int port,
+@@ -398,7 +483,7 @@ static int an8855_port_fdb_dump(struct d
  {
  	struct an8855_priv *priv = ds->priv;
  	int banks, count = 0;
@@ -282,7 +278,7 @@ index e6666d2..004a10f 100644
  	int ret;
  	int i;
  
-@@ -409,7 +494,7 @@ static int an8855_port_fdb_dump(struct dsa_switch *ds, int port,
+@@ -409,7 +494,7 @@ static int an8855_port_fdb_dump(struct d
  			   FIELD_PREP(AN8855_ATWD2_PORT, BIT(port)));
  	if (ret)
  		goto exit;
@@ -291,7 +287,7 @@ index e6666d2..004a10f 100644
  			     AN8855_FDB_START, &rsp);
  	if (ret < 0)
  		goto exit;
-@@ -451,7 +536,7 @@ static int an8855_port_fdb_dump(struct dsa_switch *ds, int port,
+@@ -451,7 +536,7 @@ static int an8855_port_fdb_dump(struct d
  			break;
  
  		/* Read next bank */
@@ -300,7 +296,7 @@ index e6666d2..004a10f 100644
  				     AN8855_FDB_NEXT, &rsp);
  		if (ret < 0)
  			break;
-@@ -549,7 +634,7 @@ static int an8855_vlan_del(struct an8855_priv *priv, u8 port,
+@@ -549,7 +634,7 @@ static int an8855_vlan_del(struct an8855
  	port_mask = FIELD_GET(AN8855_VA0_PORT, val) & ~BIT(port);
  
  	if (!(val & AN8855_VA0_VLAN_VALID)) {
@@ -309,7 +305,7 @@ index e6666d2..004a10f 100644
  		return -EINVAL;
  	}
  
-@@ -594,20 +679,20 @@ static int an8855_port_set_vlan_mode(struct an8855_priv *priv, int port,
+@@ -594,20 +679,20 @@ static int an8855_port_set_vlan_mode(str
  				  FIELD_PREP(AN8855_ACC_FRM, acc_frm));
  }
  
@@ -334,7 +330,7 @@ index e6666d2..004a10f 100644
  }
  
  static int an8855_port_vlan_filtering(struct dsa_switch *ds, int port,
-@@ -683,7 +768,7 @@ static int an8855_port_vlan_filtering(struct dsa_switch *ds, int port,
+@@ -683,7 +768,7 @@ static int an8855_port_vlan_filtering(st
  			return ret;
  
  		/* Restore default PVID */
@@ -343,7 +339,7 @@ index e6666d2..004a10f 100644
  		if (ret)
  			return ret;
  
-@@ -731,7 +816,7 @@ static int an8855_port_vlan_add(struct dsa_switch *ds, int port,
+@@ -731,7 +816,7 @@ static int an8855_port_vlan_add(struct d
  
  		/* Only configure PVID if VLAN filtering is enabled */
  		if (dsa_port_is_vlan_filtering(dsa_to_port(ds, port))) {
@@ -352,7 +348,7 @@ index e6666d2..004a10f 100644
  			if (ret)
  				return ret;
  		}
-@@ -753,7 +838,7 @@ static int an8855_port_vlan_add(struct dsa_switch *ds, int port,
+@@ -753,7 +838,7 @@ static int an8855_port_vlan_add(struct d
  				return ret;
  		}
  
@@ -361,7 +357,7 @@ index e6666d2..004a10f 100644
  		if (ret)
  			return ret;
  	}
-@@ -792,7 +877,7 @@ static int an8855_port_vlan_del(struct dsa_switch *ds, int port,
+@@ -792,7 +877,7 @@ static int an8855_port_vlan_del(struct d
  				return ret;
  		}
  
@@ -370,7 +366,7 @@ index e6666d2..004a10f 100644
  		if (ret)
  			return ret;
  	}
-@@ -812,7 +897,7 @@ an8855_port_mdb_add(struct dsa_switch *ds, int port,
+@@ -812,7 +897,7 @@ an8855_port_mdb_add(struct dsa_switch *d
  	u32 val;
  	int ret;
  
@@ -379,7 +375,7 @@ index e6666d2..004a10f 100644
  	if (!vid)
  		vid = AN8855_PORT_VID_DEFAULT;
  
-@@ -849,7 +934,7 @@ an8855_port_mdb_del(struct dsa_switch *ds, int port,
+@@ -849,7 +934,7 @@ an8855_port_mdb_del(struct dsa_switch *d
  	u32 val;
  	int ret;
  
@@ -397,7 +393,7 @@ index e6666d2..004a10f 100644
  
  	regmap_read(priv->regmap, reg, &val);
  	*data = val;
-@@ -1122,8 +1207,11 @@ static int an8855_port_mirror_add(struct dsa_switch *ds, int port,
+@@ -1122,8 +1207,11 @@ static int an8855_port_mirror_add(struct
  	int ret;
  
  	/* Check for existent entry */
@@ -410,7 +406,7 @@ index e6666d2..004a10f 100644
  
  	ret = regmap_read(priv->regmap, AN8855_MIR, &val);
  	if (ret)
-@@ -1131,8 +1219,11 @@ static int an8855_port_mirror_add(struct dsa_switch *ds, int port,
+@@ -1131,8 +1219,11 @@ static int an8855_port_mirror_add(struct
  
  	/* AN8855 supports 4 monitor port, but only use first group */
  	monitor_port = FIELD_GET(AN8855_MIRROR_PORT, val);
@@ -423,7 +419,7 @@ index e6666d2..004a10f 100644
  
  	val = AN8855_MIRROR_EN;
  	val |= FIELD_PREP(AN8855_MIRROR_PORT, mirror->to_local_port);
-@@ -1195,7 +1286,7 @@ static void an8855_port_disable(struct dsa_switch *ds, int port)
+@@ -1195,7 +1286,7 @@ static void an8855_port_disable(struct d
  	an8855_port_set_status(ds->priv, port, false);
  }
  
@@ -432,7 +428,7 @@ index e6666d2..004a10f 100644
  {
  	struct an8855_priv *priv = ds->priv;
  
-@@ -1209,6 +1300,86 @@ static u32 en8855_get_phy_flags(struct dsa_switch *ds, int port)
+@@ -1209,6 +1300,86 @@ static u32 en8855_get_phy_flags(struct d
  	return AN8855_PHY_FLAGS_EN_CALIBRATION;
  }
  
@@ -519,7 +515,7 @@ index e6666d2..004a10f 100644
  static enum dsa_tag_protocol
  an8855_get_tag_protocol(struct dsa_switch *ds, int port,
  			enum dsa_tag_protocol mp)
-@@ -1219,77 +1390,58 @@ an8855_get_tag_protocol(struct dsa_switch *ds, int port,
+@@ -1219,77 +1390,58 @@ an8855_get_tag_protocol(struct dsa_switc
  /* Similar to MT7530 also trap link local frame and special frame to CPU */
  static int an8855_trap_special_frames(struct an8855_priv *priv)
  {
@@ -620,7 +616,7 @@ index e6666d2..004a10f 100644
  }
  
  static int
-@@ -1312,12 +1464,306 @@ an8855_setup_pvid_vlan(struct an8855_priv *priv)
+@@ -1312,12 +1464,306 @@ an8855_setup_pvid_vlan(struct an8855_pri
  			       AN8855_PORT_VID_DEFAULT);
  }
  
@@ -927,7 +923,7 @@ index e6666d2..004a10f 100644
  	/* Enable and reset MIB counters */
  	ret = an8855_mib_init(priv);
  	if (ret)
-@@ -1355,7 +1801,7 @@ static int an8855_setup(struct dsa_switch *ds)
+@@ -1355,7 +1801,7 @@ static int an8855_setup(struct dsa_switc
  			return ret;
  
  		/* Set default PVID to on all user ports */
@@ -936,7 +932,7 @@ index e6666d2..004a10f 100644
  		if (ret)
  			return ret;
  	}
-@@ -1430,7 +1876,7 @@ static int an8855_setup(struct dsa_switch *ds)
+@@ -1430,7 +1876,7 @@ static int an8855_setup(struct dsa_switc
  		if (ret)
  			return ret;
  
@@ -945,7 +941,7 @@ index e6666d2..004a10f 100644
  		ret = regmap_update_bits(priv->regmap, AN8855_PVC_P(dp->index),
  					 AN8855_PVC_EG_TAG,
  					 FIELD_PREP(AN8855_PVC_EG_TAG, AN8855_VLAN_EG_CONSISTENT));
-@@ -1466,7 +1912,10 @@ static int an8855_setup(struct dsa_switch *ds)
+@@ -1466,7 +1912,10 @@ static int an8855_setup(struct dsa_switc
  			      FIELD_MAX(AN8855_AGE_UNIT) *
  			      AN8855_L2_AGING_MS_CONSTANT;
  
@@ -957,7 +953,7 @@ index e6666d2..004a10f 100644
  	ds->assisted_learning_on_cpu_port = true;
  
  	return 0;
-@@ -1564,9 +2013,10 @@ static void an8855_phylink_mac_link_up(struct phylink_config *config,
+@@ -1564,9 +2013,10 @@ static void an8855_phylink_mac_link_up(s
  	struct dsa_port *dp = dsa_phylink_to_port(config);
  	struct an8855_priv *priv = dp->ds->priv;
  	int port = dp->index;
@@ -970,7 +966,7 @@ index e6666d2..004a10f 100644
  	if (phylink_autoneg_inband(mode)) {
  		reg &= ~AN8855_PMCR_FORCE_MODE;
  	} else {
-@@ -1656,7 +2106,7 @@ static void an8855_pcs_get_state(struct phylink_pcs *pcs,
+@@ -1657,7 +2107,7 @@ static void an8855_pcs_get_state(struct
  		state->speed = SPEED_2500;
  		break;
  	case AN8855_PMSR_SPEED_5000:
@@ -979,7 +975,7 @@ index e6666d2..004a10f 100644
  		fallthrough;
  	default:
  		state->speed = SPEED_UNKNOWN;
-@@ -1678,8 +2128,6 @@ static int an8855_pcs_config(struct phylink_pcs *pcs, unsigned int neg_mode,
+@@ -1679,8 +2129,6 @@ static int an8855_pcs_config(struct phyl
  	u32 val;
  	int ret;
  
@@ -988,7 +984,7 @@ index e6666d2..004a10f 100644
  	/* TX FIR - improve TX EYE */
  	ret = regmap_update_bits(priv->regmap, AN8855_INTF_CTRL_10,
  				 AN8855_RG_DA_QP_TX_FIR_C2_SEL |
-@@ -2149,7 +2597,7 @@ static int an8855_pcs_config(struct phylink_pcs *pcs, unsigned int neg_mode,
+@@ -2150,7 +2598,7 @@ static int an8855_pcs_config(struct phyl
  
  static void an8855_pcs_an_restart(struct phylink_pcs *pcs)
  {
@@ -997,7 +993,7 @@ index e6666d2..004a10f 100644
  }
  
  static const struct phylink_pcs_ops an8855_pcs_ops = {
-@@ -2169,7 +2617,7 @@ static const struct phylink_mac_ops an8855_phylink_mac_ops = {
+@@ -2170,7 +2618,7 @@ static const struct phylink_mac_ops an88
  static const struct dsa_switch_ops an8855_switch_ops = {
  	.get_tag_protocol = an8855_get_tag_protocol,
  	.setup = an8855_setup,
@@ -1006,7 +1002,7 @@ index e6666d2..004a10f 100644
  	.phylink_get_caps = an8855_phylink_get_caps,
  	.get_strings = an8855_get_strings,
  	.get_ethtool_stats = an8855_get_ethtool_stats,
-@@ -2198,6 +2646,8 @@ static const struct dsa_switch_ops an8855_switch_ops = {
+@@ -2199,6 +2647,8 @@ static const struct dsa_switch_ops an885
  	.port_max_mtu = an8855_port_max_mtu,
  	.port_mirror_add = an8855_port_mirror_add,
  	.port_mirror_del = an8855_port_mirror_del,
@@ -1015,7 +1011,7 @@ index e6666d2..004a10f 100644
  };
  
  static int an8855_read_switch_id(struct an8855_priv *priv)
-@@ -2222,6 +2672,7 @@ static int an8855_read_switch_id(struct an8855_priv *priv)
+@@ -2223,6 +2673,7 @@ static int an8855_read_switch_id(struct
  static int an8855_switch_probe(struct platform_device *pdev)
  {
  	struct an8855_priv *priv;
@@ -1023,7 +1019,7 @@ index e6666d2..004a10f 100644
  	u32 val;
  	int ret;
  
-@@ -2230,6 +2681,12 @@ static int an8855_switch_probe(struct platform_device *pdev)
+@@ -2231,6 +2682,12 @@ static int an8855_switch_probe(struct pl
  		return -ENOMEM;
  
  	priv->dev = &pdev->dev;
@@ -1036,7 +1032,7 @@ index e6666d2..004a10f 100644
  	priv->phy_require_calib = of_property_read_bool(priv->dev->of_node,
  							"airoha,ext-surge");
  
-@@ -2240,12 +2697,20 @@ static int an8855_switch_probe(struct platform_device *pdev)
+@@ -2241,12 +2698,20 @@ static int an8855_switch_probe(struct pl
  
  	/* Get regmap from MFD */
  	priv->regmap = dev_get_regmap(priv->dev->parent, NULL);
@@ -1058,7 +1054,7 @@ index e6666d2..004a10f 100644
  
  		/* Poll HWTRAP reg to wait for Switch to fully Init */
  		ret = regmap_read_poll_timeout(priv->regmap, AN8855_HWTRAP, val,
-@@ -2258,6 +2723,12 @@ static int an8855_switch_probe(struct platform_device *pdev)
+@@ -2259,6 +2724,12 @@ static int an8855_switch_probe(struct pl
  	if (ret)
  		return ret;
  
@@ -1071,7 +1067,7 @@ index e6666d2..004a10f 100644
  	priv->ds = devm_kzalloc(priv->dev, sizeof(*priv->ds), GFP_KERNEL);
  	if (!priv->ds)
  		return -ENOMEM;
-@@ -2284,6 +2755,8 @@ static void an8855_switch_remove(struct platform_device *pdev)
+@@ -2285,6 +2756,8 @@ static void an8855_switch_remove(struct
  
  	if (priv)
  		dsa_unregister_switch(priv->ds);
@@ -1080,8 +1076,6 @@ index e6666d2..004a10f 100644
  }
  
  static const struct of_device_id an8855_switch_of_match[] = {
-diff --git a/drivers/net/dsa/an8855.h b/drivers/net/dsa/an8855.h
-index 2462b9d..ae3d9b7 100644
 --- a/drivers/net/dsa/an8855.h
 +++ b/drivers/net/dsa/an8855.h
 @@ -9,12 +9,17 @@
@@ -1342,11 +1336,9 @@ index 2462b9d..ae3d9b7 100644
  };
  
  #endif /* __AN8855_H */
-diff --git a/drivers/net/mdio/mdio-an8855.c b/drivers/net/mdio/mdio-an8855.c
-index 5feba72..60c7d40 100644
 --- a/drivers/net/mdio/mdio-an8855.c
 +++ b/drivers/net/mdio/mdio-an8855.c
-@@ -34,6 +34,8 @@ static int an8855_phy_read(struct mii_bus *bus, int phy, int regnum)
+@@ -34,6 +34,8 @@ static int an8855_phy_read(struct mii_bu
  
  	mutex_lock_nested(&real_bus->mdio_lock, MDIO_MUTEX_NESTED);
  
@@ -1355,7 +1347,7 @@ index 5feba72..60c7d40 100644
  	ret = an855_phy_restore_page(priv, phy);
  	if (ret)
  		goto exit;
-@@ -53,6 +55,8 @@ static int an8855_phy_write(struct mii_bus *bus, int phy, int regnum, u16 val)
+@@ -53,6 +55,8 @@ static int an8855_phy_write(struct mii_b
  
  	mutex_lock_nested(&real_bus->mdio_lock, MDIO_MUTEX_NESTED);
  
@@ -1364,8 +1356,6 @@ index 5feba72..60c7d40 100644
  	ret = an855_phy_restore_page(priv, phy);
  	if (ret)
  		goto exit;
-diff --git a/drivers/net/phy/air_an8855.c b/drivers/net/phy/air_an8855.c
-index 7fab085..c2c6945 100644
 --- a/drivers/net/phy/air_an8855.c
 +++ b/drivers/net/phy/air_an8855.c
 @@ -68,10 +68,10 @@ static const u8 dsa_r50ohm_table[] = {
@@ -1381,7 +1371,7 @@ index 7fab085..c2c6945 100644
  	int ret;
  	int i;
  
-@@ -151,19 +151,19 @@ static int an8855_config_init(struct phy_device *phydev)
+@@ -151,19 +151,19 @@ static int an8855_config_init(struct phy
  	if (priv && phydev->dev_flags & AN8855_PHY_FLAGS_EN_CALIBRATION) {
  		u8 *calibration_data = priv->calibration_data;
  
@@ -1405,6 +1395,3 @@ index 7fab085..c2c6945 100644
  		if (ret)
  			return ret;
  
--- 
-2.45.2
-

@@ -21,8 +21,6 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  drivers/net/ethernet/mediatek/mtk_eth_soc.h |   9 +-
  3 files changed, 88 insertions(+), 71 deletions(-)
 
-diff --git a/drivers/net/ethernet/mediatek/Kconfig b/drivers/net/ethernet/mediatek/Kconfig
-index 6f35d4f..64909b0 100644
 --- a/drivers/net/ethernet/mediatek/Kconfig
 +++ b/drivers/net/ethernet/mediatek/Kconfig
 @@ -17,6 +17,7 @@ config NET_MEDIATEK_SOC
@@ -33,8 +31,6 @@ index 6f35d4f..64909b0 100644
  	select PAGE_POOL
  	select PCS_MTK_LYNXI
  	select REGMAP_MMIO
-diff --git a/drivers/net/ethernet/mediatek/mtk_eth_soc.c b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-index fb7be4b..2484792 100644
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 @@ -33,6 +33,7 @@
@@ -45,7 +41,7 @@ index fb7be4b..2484792 100644
  
  #include "mtk_eth_soc.h"
  #include "mtk_wed.h"
-@@ -1333,6 +1334,34 @@ static void *mtk_max_lro_buf_alloc(gfp_t gfp_mask)
+@@ -1333,6 +1334,34 @@ static void *mtk_max_lro_buf_alloc(gfp_t
  	return (void *)data;
  }
  
@@ -80,7 +76,7 @@ index fb7be4b..2484792 100644
  /* the qdma core needs scratch memory to be setup */
  static int mtk_init_fq_dma(struct mtk_eth *eth)
  {
-@@ -1342,13 +1371,8 @@ static int mtk_init_fq_dma(struct mtk_eth *eth)
+@@ -1342,13 +1371,8 @@ static int mtk_init_fq_dma(struct mtk_et
  	dma_addr_t dma_addr;
  	int i, j, len;
  
@@ -96,7 +92,7 @@ index fb7be4b..2484792 100644
  
  	if (unlikely(!eth->scratch_ring))
  		return -ENOMEM;
-@@ -2870,14 +2894,7 @@ static int mtk_tx_alloc(struct mtk_eth *eth)
+@@ -2870,14 +2894,7 @@ static int mtk_tx_alloc(struct mtk_eth *
  	if (!ring->buf)
  		goto no_tx_mem;
  
@@ -112,7 +108,7 @@ index fb7be4b..2484792 100644
  	if (!ring->dma)
  		goto no_tx_mem;
  
-@@ -2972,7 +2989,6 @@ static int mtk_tx_alloc(struct mtk_eth *eth)
+@@ -2972,7 +2989,6 @@ no_tx_mem:
  
  static void mtk_tx_clean(struct mtk_eth *eth)
  {
@@ -120,7 +116,7 @@ index fb7be4b..2484792 100644
  	struct mtk_tx_ring *ring = &eth->tx_ring;
  	int i;
  
-@@ -2982,10 +2998,10 @@ static void mtk_tx_clean(struct mtk_eth *eth)
+@@ -2982,10 +2998,10 @@ static void mtk_tx_clean(struct mtk_eth
  		kfree(ring->buf);
  		ring->buf = NULL;
  	}
@@ -135,7 +131,7 @@ index fb7be4b..2484792 100644
  		ring->dma = NULL;
  	}
  
-@@ -3002,14 +3018,9 @@ static int mtk_rx_alloc(struct mtk_eth *eth, int ring_no, int rx_flag)
+@@ -3002,14 +3018,9 @@ static int mtk_rx_alloc(struct mtk_eth *
  	const struct mtk_reg_map *reg_map = eth->soc->reg_map;
  	const struct mtk_soc_data *soc = eth->soc;
  	struct mtk_rx_ring *ring;
@@ -151,7 +147,7 @@ index fb7be4b..2484792 100644
  	if (rx_flag == MTK_RX_FLAGS_QDMA) {
  		if (ring_no)
  			return -EINVAL;
-@@ -3044,18 +3055,10 @@ static int mtk_rx_alloc(struct mtk_eth *eth, int ring_no, int rx_flag)
+@@ -3044,18 +3055,10 @@ static int mtk_rx_alloc(struct mtk_eth *
  		ring->page_pool = pp;
  	}
  
@@ -174,7 +170,7 @@ index fb7be4b..2484792 100644
  	if (!ring->dma)
  		return -ENOMEM;
  
-@@ -3170,10 +3173,9 @@ static void mtk_rx_clean(struct mtk_eth *eth, struct mtk_rx_ring *ring, bool in_
+@@ -3170,10 +3173,9 @@ static void mtk_rx_clean(struct mtk_eth
  		ring->data = NULL;
  	}
  
@@ -188,7 +184,7 @@ index fb7be4b..2484792 100644
  		ring->dma = NULL;
  	}
  
-@@ -3541,15 +3543,15 @@ static void mtk_dma_free(struct mtk_eth *eth)
+@@ -3541,15 +3543,15 @@ static void mtk_dma_free(struct mtk_eth
  			netdev_tx_reset_subqueue(eth->netdev[i], j);
  	}
  
@@ -209,7 +205,7 @@ index fb7be4b..2484792 100644
  	mtk_rx_clean(eth, &eth->rx_ring_qdma, false);
  
  	if (eth->hwlro) {
-@@ -5460,9 +5462,30 @@ static int mtk_sgmii_init(struct mtk_eth *eth)
+@@ -5464,9 +5466,30 @@ static int mtk_sgmii_init(struct mtk_eth
  	return 0;
  }
  
@@ -241,7 +237,7 @@ index fb7be4b..2484792 100644
  	struct device_node *mac_np;
  	struct mtk_eth *eth;
  	int err, i;
-@@ -5482,20 +5505,6 @@ static int mtk_probe(struct platform_device *pdev)
+@@ -5486,20 +5509,6 @@ static int mtk_probe(struct platform_dev
  	if (MTK_HAS_CAPS(eth->soc->caps, MTK_SOC_MT7628))
  		eth->ip_align = NET_IP_ALIGN;
  
@@ -262,7 +258,7 @@ index fb7be4b..2484792 100644
  	if (MTK_HAS_CAPS(eth->soc->caps, MTK_36BIT_DMA)) {
  		err = dma_set_mask(&pdev->dev, DMA_BIT_MASK(36));
  		if (!err)
-@@ -5572,15 +5581,19 @@ static int mtk_probe(struct platform_device *pdev)
+@@ -5576,15 +5585,19 @@ static int mtk_probe(struct platform_dev
  			goto err_destroy_sgmii;
  		}
  		if (MTK_HAS_CAPS(eth->soc->caps, MTK_SRAM)) {
@@ -288,8 +284,6 @@ index fb7be4b..2484792 100644
  			}
  		}
  	}
-diff --git a/drivers/net/ethernet/mediatek/mtk_eth_soc.h b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-index 15b5dd6..def32a5 100644
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 @@ -144,8 +144,10 @@
@@ -322,6 +316,3 @@ index 15b5dd6..def32a5 100644
  	spinlock_t			page_lock;
  	spinlock_t			tx_irq_lock;
  	spinlock_t			rx_irq_lock;
--- 
-2.45.2
-

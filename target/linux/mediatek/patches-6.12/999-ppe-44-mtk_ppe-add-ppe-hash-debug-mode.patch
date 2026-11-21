@@ -96,7 +96,7 @@ Usage:
  	hash &= MTK_PPE_ENTRIES - 1;
  
  	return hash;
-@@ -1104,7 +1146,7 @@ int mtk_foe_entry_commit(struct mtk_ppe
+@@ -1095,7 +1137,7 @@ int mtk_foe_entry_commit(struct mtk_ppe
  	if (type == MTK_PPE_PKT_TYPE_BRIDGE)
  		return mtk_foe_entry_commit_l2(ppe, entry);
  
@@ -105,7 +105,7 @@ Usage:
  	entry->hash = 0xffff;
  	spin_lock_bh(&ppe_lock);
  	hlist_add_head(&entry->list, &ppe->foe_flow[hash / soc->hash_offset]);
-@@ -1421,7 +1463,9 @@ void mtk_ppe_start(struct mtk_ppe *ppe)
+@@ -1412,7 +1454,9 @@ void mtk_ppe_start(struct mtk_ppe *ppe)
  	      FIELD_PREP(MTK_PPE_TB_CFG_ENTRY_NUM,
  			 MTK_PPE_ENTRIES_SHIFT);
  	if (mtk_is_netsys_v2_or_greater(ppe->eth))

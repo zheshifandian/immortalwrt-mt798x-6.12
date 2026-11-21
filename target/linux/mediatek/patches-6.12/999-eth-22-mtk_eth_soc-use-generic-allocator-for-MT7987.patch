@@ -119,7 +119,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  	mtk_w32(eth, phy_ring_tail, soc->reg_map->qdma.fq_tail);
  	mtk_w32(eth, (cnt << 16) | cnt, soc->reg_map->qdma.fq_count);
  	mtk_w32(eth, MTK_QDMA_PAGE_SIZE << 16, soc->reg_map->qdma.fq_blen);
-@@ -2914,7 +2919,8 @@ static int mtk_tx_alloc(struct mtk_eth *
+@@ -2922,7 +2927,8 @@ static int mtk_tx_alloc(struct mtk_eth *
  	if (!ring->buf)
  		goto no_tx_mem;
  
@@ -129,7 +129,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  	if (!ring->dma)
  		goto no_tx_mem;
  
-@@ -3021,7 +3027,7 @@ static void mtk_tx_clean(struct mtk_eth
+@@ -3029,7 +3035,7 @@ static void mtk_tx_clean(struct mtk_eth
  
  	if (ring->dma) {
  		mtk_dma_ring_free(eth, TX_DESC_OFS(eth, ring->dma_size),
@@ -138,7 +138,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  		ring->dma = NULL;
  	}
  
-@@ -3078,7 +3084,8 @@ static int mtk_rx_alloc(struct mtk_eth *
+@@ -3086,7 +3092,8 @@ static int mtk_rx_alloc(struct mtk_eth *
  	ring->dma = mtk_dma_ring_alloc(eth,
  				       RX_DESC_OFS(eth, rx_dma_size),
  				       &ring->phys,
@@ -148,7 +148,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  	if (!ring->dma)
  		return -ENOMEM;
  
-@@ -3923,15 +3930,15 @@ static void mtk_dma_free(struct mtk_eth
+@@ -3931,15 +3938,15 @@ static void mtk_dma_free(struct mtk_eth
  			netdev_tx_reset_subqueue(eth->netdev[i], j);
  	}
  
@@ -170,7 +170,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  	mtk_rx_clean(eth, &eth->rx_ring_qdma, false);
  
  	if (eth->hwlro) {
-@@ -3948,8 +3955,8 @@ static void mtk_dma_free(struct mtk_eth
+@@ -3956,8 +3963,8 @@ static void mtk_dma_free(struct mtk_eth
  	}
  
  	for (i = 0; i < DIV_ROUND_UP(soc->tx.fq_dma_size, MTK_FQ_DMA_LENGTH); i++) {

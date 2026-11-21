@@ -19,11 +19,9 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  arch/arm64/boot/dts/mediatek/mt7988a.dtsi | 12 ++++++++++--
  1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/mediatek/mt7988a.dtsi b/arch/arm64/boot/dts/mediatek/mt7988a.dtsi
-index e03475a..0b2a855 100644
 --- a/arch/arm64/boot/dts/mediatek/mt7988a.dtsi
 +++ b/arch/arm64/boot/dts/mediatek/mt7988a.dtsi
-@@ -1128,8 +1128,7 @@ ethwarp: clock-controller@15031000 {
+@@ -1109,8 +1109,7 @@
  
  		eth: ethernet@15100000 {
  			compatible = "mediatek,mt7988-eth";
@@ -33,7 +31,7 @@ index e03475a..0b2a855 100644
  			interrupts = <GIC_SPI 196 IRQ_TYPE_LEVEL_HIGH>,
  				     <GIC_SPI 197 IRQ_TYPE_LEVEL_HIGH>,
  				     <GIC_SPI 198 IRQ_TYPE_LEVEL_HIGH>,
-@@ -1181,6 +1180,7 @@ eth: ethernet@15100000 {
+@@ -1162,6 +1161,7 @@
  						 <&topckgen CLK_TOP_NET1PLL_D8_D4>,
  						 <&apmixedsys CLK_APMIXED_SGMPLL>,
  						 <&apmixedsys CLK_APMIXED_SGMPLL>;
@@ -41,7 +39,7 @@ index e03475a..0b2a855 100644
  			mediatek,ethsys = <&ethsys>;
  			mediatek,infracfg = <&topmisc>;
  			mediatek,wed = <&wed0>, <&wed1>, <&wed2>;
-@@ -1245,6 +1245,14 @@ i2p5gbe_led1: i2p5gbe-led1@1 {
+@@ -1226,6 +1226,14 @@
  			};
  		};
  
@@ -56,6 +54,3 @@ index e03475a..0b2a855 100644
  		wo_ccif0: syscon@151a5000 {
  			compatible = "mediatek,mt7988-wo-ccif", "syscon";
  			reg = <0 0x151a5000 0 0x1000>;
--- 
-2.45.2
-

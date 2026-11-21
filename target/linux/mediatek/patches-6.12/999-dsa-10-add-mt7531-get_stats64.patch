@@ -28,11 +28,9 @@ Signed-off-by: YP Wang <yp.wang@mediatek.com>
  drivers/net/dsa/mt7530.h | 42 +++++++++++++++++++++++++++
  2 files changed, 103 insertions(+)
 
-diff --git a/drivers/net/dsa/mt7530.c b/drivers/net/dsa/mt7530.c
-index 5331379..796dd08 100644
 --- a/drivers/net/dsa/mt7530.c
 +++ b/drivers/net/dsa/mt7530.c
-@@ -794,6 +794,66 @@ mt7530_get_sset_count(struct dsa_switch *ds, int port, int sset)
+@@ -820,6 +820,66 @@ mt7530_get_sset_count(struct dsa_switch
  	return ARRAY_SIZE(mt7530_mib);
  }
  
@@ -99,7 +97,7 @@ index 5331379..796dd08 100644
  static int
  mt7530_set_ageing_time(struct dsa_switch *ds, unsigned int msecs)
  {
-@@ -3193,6 +3253,7 @@ const struct dsa_switch_ops mt7530_switch_ops = {
+@@ -3146,6 +3206,7 @@ const struct dsa_switch_ops mt7530_switc
  	.get_strings		= mt7530_get_strings,
  	.get_ethtool_stats	= mt7530_get_ethtool_stats,
  	.get_sset_count		= mt7530_get_sset_count,
@@ -107,8 +105,6 @@ index 5331379..796dd08 100644
  	.set_ageing_time	= mt7530_set_ageing_time,
  	.port_enable		= mt7530_port_enable,
  	.port_disable		= mt7530_port_disable,
-diff --git a/drivers/net/dsa/mt7530.h b/drivers/net/dsa/mt7530.h
-index 2aac404..5afcb2d 100644
 --- a/drivers/net/dsa/mt7530.h
 +++ b/drivers/net/dsa/mt7530.h
 @@ -411,6 +411,48 @@ enum mt7530_vlan_port_acc_frm {
@@ -160,6 +156,3 @@ index 2aac404..5afcb2d 100644
  #define MT7530_MIB_CCR			0x4fe0
  #define  CCR_MIB_ENABLE			BIT(31)
  #define  CCR_RX_OCT_CNT_GOOD		BIT(7)
--- 
-2.45.2
-

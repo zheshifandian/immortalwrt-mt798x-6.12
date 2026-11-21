@@ -18,7 +18,7 @@ Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
 
 --- a/crypto/testmgr.c
 +++ b/crypto/testmgr.c
-@@ -4395,6 +4395,13 @@ static const struct alg_test_desc alg_te
+@@ -4397,6 +4397,13 @@ static const struct alg_test_desc alg_te
  			.aead = __VECS(hmac_md5_ecb_cipher_null_tv_template)
  		}
  	}, {
@@ -34,7 +34,7 @@ Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
  		.fips_allowed = 1,
 --- a/crypto/testmgr.h
 +++ b/crypto/testmgr.h
-@@ -20443,6 +20443,213 @@ static const struct aead_testvec hmac_sh
+@@ -20780,6 +20780,213 @@ static const struct aead_testvec hmac_sh
  	},
  };
  

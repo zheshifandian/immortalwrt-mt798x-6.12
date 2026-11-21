@@ -28,8 +28,6 @@ Subject: [PATCH 4/6]
  drivers/usb/host/xhci-mtk.h |  1 +
  2 files changed, 23 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/usb/host/xhci-mtk.c b/drivers/usb/host/xhci-mtk.c
-index 3252e3d2d79c..45be35beb114 100644
 --- a/drivers/usb/host/xhci-mtk.c
 +++ b/drivers/usb/host/xhci-mtk.c
 @@ -24,6 +24,11 @@
@@ -44,7 +42,7 @@ index 3252e3d2d79c..45be35beb114 100644
  /* ip_pw_ctrl0 register */
  #define CTRL0_IP_SW_RST	BIT(0)
  
-@@ -477,6 +482,7 @@ static int xhci_mtk_setup(struct usb_hcd *hcd)
+@@ -477,6 +482,7 @@ static int xhci_mtk_setup(struct usb_hcd
  {
  	struct xhci_hcd_mtk *mtk = hcd_to_mtk(hcd);
  	int ret;
@@ -52,7 +50,7 @@ index 3252e3d2d79c..45be35beb114 100644
  
  	if (usb_hcd_is_primary_hcd(hcd)) {
  		ret = xhci_mtk_ssusb_config(mtk);
-@@ -490,8 +496,20 @@ static int xhci_mtk_setup(struct usb_hcd *hcd)
+@@ -490,8 +496,20 @@ static int xhci_mtk_setup(struct usb_hcd
  	if (ret)
  		return ret;
  
@@ -74,7 +72,7 @@ index 3252e3d2d79c..45be35beb114 100644
  
  	return ret;
  }
-@@ -563,6 +581,9 @@ static int xhci_mtk_probe(struct platform_device *pdev)
+@@ -563,6 +581,9 @@ static int xhci_mtk_probe(struct platfor
  
  	of_property_read_u32(node, "rx-fifo-depth", &mtk->rxfifo_depth);
  
@@ -84,8 +82,6 @@ index 3252e3d2d79c..45be35beb114 100644
  	ret = usb_wakeup_of_property_parse(mtk, node);
  	if (ret) {
  		dev_err(dev, "failed to parse uwk property\n");
-diff --git a/drivers/usb/host/xhci-mtk.h b/drivers/usb/host/xhci-mtk.h
-index f5e2bd66bb1b..5153c1e65a22 100644
 --- a/drivers/usb/host/xhci-mtk.h
 +++ b/drivers/usb/host/xhci-mtk.h
 @@ -173,6 +173,7 @@ struct xhci_hcd_mtk {
@@ -96,6 +92,3 @@ index f5e2bd66bb1b..5153c1e65a22 100644
  };
  
  static inline struct xhci_hcd_mtk *hcd_to_mtk(struct usb_hcd *hcd)
--- 
-2.45.2
-

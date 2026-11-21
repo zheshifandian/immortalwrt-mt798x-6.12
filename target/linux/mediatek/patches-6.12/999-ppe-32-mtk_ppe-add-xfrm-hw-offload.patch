@@ -18,7 +18,7 @@ v1: Add xfrm hw offload
  
  #include "mtk_eth_soc.h"
  #include "mtk_ppe.h"
-@@ -619,6 +620,28 @@ int mtk_foe_entry_set_pppoe(struct mtk_e
+@@ -610,6 +611,28 @@ int mtk_foe_entry_set_pppoe(struct mtk_e
  	return 0;
  }
  
@@ -47,7 +47,7 @@ v1: Add xfrm hw offload
  int mtk_foe_entry_set_wdma(struct mtk_eth *eth, struct mtk_foe_entry *entry,
  			   int wdma_idx, int txq, int bss, int wcid,
  			   bool amsdu_en)
-@@ -932,6 +955,73 @@ void mtk_foe_entry_clear(struct mtk_ppe
+@@ -923,6 +946,73 @@ void mtk_foe_entry_clear(struct mtk_ppe
  	spin_unlock_bh(&ppe_lock);
  }
  
@@ -169,7 +169,7 @@ v1: Add xfrm hw offload
  #endif
 --- a/drivers/net/ethernet/mediatek/mtk_ppe_offload.c
 +++ b/drivers/net/ethernet/mediatek/mtk_ppe_offload.c
-@@ -46,6 +46,9 @@ struct mtk_flow_data {
+@@ -47,6 +47,9 @@ struct mtk_flow_data {
  		u16 sid;
  		u8 num;
  	} pppoe;
@@ -179,7 +179,7 @@ v1: Add xfrm hw offload
  };
  
  static const struct rhashtable_params mtk_flow_ht_params = {
-@@ -55,6 +58,9 @@ static const struct rhashtable_params mt
+@@ -56,6 +59,9 @@ static const struct rhashtable_params mt
  	.automatic_shrinking = true,
  };
  
@@ -189,7 +189,7 @@ v1: Add xfrm hw offload
  static int
  mtk_flow_set_ipv4_addr(struct mtk_eth *eth, struct mtk_foe_entry *foe,
  		       struct mtk_flow_data *data, bool egress)
-@@ -524,6 +530,14 @@ mtk_flow_offload_replace(struct mtk_eth
+@@ -582,6 +588,14 @@ mtk_flow_offload_replace(struct mtk_eth
  			data.pppoe.sid = act->pppoe.sid;
  			data.pppoe.num++;
  			break;
@@ -204,7 +204,7 @@ v1: Add xfrm hw offload
  		default:
  			return -EOPNOTSUPP;
  		}
-@@ -622,6 +636,11 @@ mtk_flow_offload_replace(struct mtk_eth
+@@ -683,6 +697,11 @@ mtk_flow_offload_replace(struct mtk_eth
  	if (data.pppoe.num == 1)
  		mtk_foe_entry_set_pppoe(eth, &foe, data.pppoe.sid);
  

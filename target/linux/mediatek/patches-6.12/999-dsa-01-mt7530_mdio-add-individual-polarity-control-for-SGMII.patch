@@ -29,11 +29,9 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  drivers/net/dsa/mt7530-mdio.c | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/dsa/mt7530-mdio.c b/drivers/net/dsa/mt7530-mdio.c
-index 51df42c..6163be7 100644
 --- a/drivers/net/dsa/mt7530-mdio.c
 +++ b/drivers/net/dsa/mt7530-mdio.c
-@@ -114,7 +114,8 @@ mt7531_create_sgmii(struct mt7530_priv *priv)
+@@ -121,7 +121,8 @@ mt7531_create_sgmii(struct mt7530_priv *
  			break;
  		}
  		pcs = mtk_pcs_lynxi_create(priv->dev, regmap,
@@ -43,6 +41,3 @@ index 51df42c..6163be7 100644
  		if (!pcs) {
  			ret = -ENXIO;
  			break;
--- 
-2.45.2
-

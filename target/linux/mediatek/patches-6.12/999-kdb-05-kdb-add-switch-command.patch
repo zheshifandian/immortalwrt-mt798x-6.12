@@ -18,8 +18,6 @@ Add a KDB command for MT753x and MT7988 switch diagnostics.
 Signed-off-by: Evan Zhang <Evan.Zhang@mediatek.com>
 ---
 
-diff --git a/kernel/debug/kdb/Makefile b/kernel/debug/kdb/Makefile
-index 846a279..7f4c251 100644
 --- a/kernel/debug/kdb/Makefile
 +++ b/kernel/debug/kdb/Makefile
 @@ -6,7 +6,7 @@
@@ -31,9 +29,6 @@ index 846a279..7f4c251 100644
  obj-$(CONFIG_KDB_KEYBOARD)    += kdb_keyboard.o
  
  clean-files := gen-kdb_cmds.c
-diff --git a/kernel/debug/kdb/kdb_switch.c b/kernel/debug/kdb/kdb_switch.c
-new file mode 100644
-index 0000000..71a73fc
 --- /dev/null
 +++ b/kernel/debug/kdb/kdb_switch.c
 @@ -0,0 +1,1015 @@
@@ -1052,5 +1047,3 @@ index 0000000..71a73fc
 +	}
 +
 +	late_initcall(kdb_switch_init);
--- 
-2.45.2

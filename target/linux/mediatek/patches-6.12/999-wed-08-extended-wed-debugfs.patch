@@ -46,7 +46,7 @@ Subject: [PATCH] extended wed debugfs
  		.tx_bm_tkid		= 0x0c8,
  		.wpdma_rx_ring = {
  			0x7d0,
-@@ -1696,8 +1699,8 @@ mtk_wed_rx_reset(struct mtk_wed_device *
+@@ -1709,8 +1712,8 @@ mtk_wed_rx_reset(struct mtk_wed_device *
  	/* reset tx wdma drv */
  	wed_clr(dev, MTK_WED_WDMA_GLO_CFG, MTK_WED_WDMA_GLO_CFG_TX_DRV_EN);
  	if (mtk_wed_is_v3_or_greater(dev->hw))
@@ -57,7 +57,7 @@ Subject: [PATCH] extended wed debugfs
  	else
  		mtk_wed_poll_busy(dev, MTK_WED_CTRL,
  				  MTK_WED_CTRL_WDMA_INT_AGENT_BUSY);
-@@ -2500,7 +2503,7 @@ mtk_wed_attach(struct mtk_wed_device *de
+@@ -2518,7 +2521,7 @@ mtk_wed_attach(struct mtk_wed_device *de
  		regmap_update_bits(hw->hifsys, HIFSYS_DMA_AG_MAP,
  				   BIT(hw->index), 0);
  	else
@@ -819,7 +819,7 @@ Subject: [PATCH] extended wed debugfs
  #define MTK_WDMA_GLO_CFG				0x204
  #define MTK_WDMA_GLO_CFG_TX_DMA_EN			BIT(0)
  #define MTK_WDMA_GLO_CFG_TX_DMA_BUSY			BIT(1)
-@@ -440,7 +477,7 @@ struct mtk_wdma_desc {
+@@ -441,7 +478,7 @@ struct mtk_wdma_desc {
  #define MTK_WDMA_RESET_IDX				0x208
  #define MTK_WDMA_RESET_IDX_TX				GENMASK(3, 0)
  #define MTK_WDMA_RESET_IDX_RX				GENMASK(17, 16)
@@ -828,7 +828,7 @@ Subject: [PATCH] extended wed debugfs
  #define MTK_WDMA_INT_STATUS				0x220
  
  #define MTK_WDMA_INT_MASK				0x228
-@@ -466,8 +503,13 @@ struct mtk_wdma_desc {
+@@ -467,8 +504,13 @@ struct mtk_wdma_desc {
  #define MTK_WDMA_XDMA_RX_FIFO_CFG_RX_WID_FIFO_CLEAR	BIT(18)
  #define MTK_WDMA_XDMA_RX_FIFO_CFG_RX_BID_FIFO_CLEAR	BIT(21)
  
@@ -842,7 +842,7 @@ Subject: [PATCH] extended wed debugfs
  
  #define MTK_WDMA_PREF_TX_CFG				0x2d0
  #define MTK_WDMA_PREF_TX_CFG_PREF_EN			BIT(0)
-@@ -589,6 +631,7 @@ struct mtk_wdma_desc {
+@@ -590,6 +632,7 @@ struct mtk_wdma_desc {
  #define MTK_WED_RROQM_FDBK_CNT				GENMASK(11, 0)
  
  #define MTK_WED_RROQM_FDBK_CTRL2			0xc58
@@ -850,7 +850,7 @@ Subject: [PATCH] extended wed debugfs
  
  #define MTK_WED_RROQ_BASE_L				0xc80
  #define MTK_WED_RROQ_BASE_H				0xc84
-@@ -612,7 +655,7 @@ struct mtk_wdma_desc {
+@@ -613,7 +656,7 @@ struct mtk_wdma_desc {
  #define MTK_WED_RX_BM_BASE				0xd84
  #define MTK_WED_RX_BM_INIT_PTR				0xd88
  #define MTK_WED_RX_BM_PTR				0xd8c
@@ -859,7 +859,7 @@ Subject: [PATCH] extended wed debugfs
  #define MTK_WED_RX_BM_PTR_TAIL				GENMASK(15, 0)
  
  #define MTK_WED_RX_BM_BLEN				0xd90
-@@ -623,12 +666,15 @@ struct mtk_wdma_desc {
+@@ -624,12 +667,15 @@ struct mtk_wdma_desc {
  
  #define MTK_RRO_IND_CMD_SIGNATURE			0xe00
  #define MTK_RRO_IND_CMD_DMA_IDX				GENMASK(11, 0)
@@ -875,7 +875,7 @@ Subject: [PATCH] extended wed debugfs
  
  #define MTK_WED_IND_CMD_RX_CTRL1			0xe08
  #define MTK_WED_IND_CMD_RX_CTRL2			0xe0c
-@@ -643,6 +689,7 @@ struct mtk_wdma_desc {
+@@ -644,6 +690,7 @@ struct mtk_wdma_desc {
  
  #define MTK_WED_ADDR_ELEM_CFG0				0xe18
  #define MTK_WED_ADDR_ELEM_CFG1				0xe1c
@@ -883,7 +883,7 @@ Subject: [PATCH] extended wed debugfs
  #define MTK_WED_ADDR_ELEM_PREFETCH_FREE_CNT		GENMASK(19, 16)
  
  #define MTK_WED_ADDR_ELEM_TBL_CFG			0xe20
-@@ -666,6 +713,7 @@ struct mtk_wdma_desc {
+@@ -667,6 +714,7 @@ struct mtk_wdma_desc {
  #define MTK_WED_PN_CHECK_IS_FIRST			BIT(17)
  
  #define MTK_WED_RRO_MSDU_PG_RING_CFG(_n)		(0xe44 + (_n) * 0x8)
@@ -891,7 +891,7 @@ Subject: [PATCH] extended wed debugfs
  
  #define MTK_WED_RRO_MSDU_PG_RING2_CFG			0xe58
  #define MTK_WED_RRO_MSDU_PG_DRV_CLR			BIT(26)
-@@ -676,6 +724,9 @@ struct mtk_wdma_desc {
+@@ -677,6 +725,9 @@ struct mtk_wdma_desc {
  #define MTK_WED_RRO_MSDU_PG_CTRL2(_n)			(0xe64 + (_n) * 0xc)
  
  #define MTK_WED_RRO_RX_D_RX(_n)				(0xe80 + (_n) * 0x10)
@@ -901,7 +901,7 @@ Subject: [PATCH] extended wed debugfs
  
  #define MTK_WED_RRO_RX_MAGIC_CNT			BIT(13)
  
-@@ -690,6 +741,15 @@ struct mtk_wdma_desc {
+@@ -691,6 +742,15 @@ struct mtk_wdma_desc {
  #define MTK_WED_RRO_PG_BM_INIT_PTR			0xeb8
  #define MTK_WED_RRO_PG_BM_SW_TAIL_IDX			GENMASK(15, 0)
  #define MTK_WED_RRO_PG_BM_INIT_SW_TAIL_IDX		BIT(16)
@@ -917,7 +917,7 @@ Subject: [PATCH] extended wed debugfs
  
  #define MTK_WED_WPDMA_INT_CTRL_RRO_RX			0xeec
  #define MTK_WED_WPDMA_INT_CTRL_RRO_RX0_EN		BIT(0)
-@@ -806,7 +866,8 @@ struct mtk_wdma_desc {
+@@ -807,7 +867,8 @@ struct mtk_wdma_desc {
  #define MTK_WED_AMSDU_QMEM_TID6_QTAIL			GENMASK(27, 16)
  #define MTK_WED_AMSDU_QMEM_TID7_QTAIL			GENMASK(11, 0)
  

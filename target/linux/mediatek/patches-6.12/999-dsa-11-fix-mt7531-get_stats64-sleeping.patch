@@ -25,8 +25,6 @@ Signed-off-by: YP Wang <yp.wang@mediatek.com>
  drivers/net/dsa/mt7530.h |  8 +++++
  2 files changed, 80 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/net/dsa/mt7530.c b/drivers/net/dsa/mt7530.c
-index 796dd08..ec6ab99 100644
 --- a/drivers/net/dsa/mt7530.c
 +++ b/drivers/net/dsa/mt7530.c
 @@ -24,6 +24,9 @@
@@ -39,7 +37,7 @@ index 796dd08..ec6ab99 100644
  static struct mt753x_pcs *pcs_to_mt753x_pcs(struct phylink_pcs *pcs)
  {
  	return container_of(pcs, struct mt753x_pcs, pcs);
-@@ -809,10 +812,9 @@ mt7530_read_port_stats(struct mt7530_priv *priv, int port,
+@@ -835,10 +838,9 @@ mt7530_read_port_stats(struct mt7530_pri
  	}
  }
  
@@ -52,7 +50,7 @@ index 796dd08..ec6ab99 100644
  	uint64_t data;
  
  	/* MIB counter doesn't provide a FramesTransmittedOK but instead
-@@ -854,6 +856,54 @@ static void mt7530_get_stats64(struct dsa_switch *ds, int port,
+@@ -880,6 +882,54 @@ static void mt7530_get_stats64(struct ds
  			       &storage->rx_crc_errors);
  }
  
@@ -107,9 +105,9 @@ index 796dd08..ec6ab99 100644
  static int
  mt7530_set_ageing_time(struct dsa_switch *ds, unsigned int msecs)
  {
-@@ -3124,9 +3174,24 @@ mt753x_setup(struct dsa_switch *ds)
- 			mt7530_free_irq(priv);
- 	}
+@@ -3077,9 +3127,24 @@ mt753x_setup(struct dsa_switch *ds)
+ 	if (ret && priv->irq_domain)
+ 		mt7530_free_mdio_irq(priv);
  
 +	if (!ret && priv->bus) {
 +		mt7530_stats_refresh(priv);
@@ -132,7 +130,7 @@ index 796dd08..ec6ab99 100644
  static int mt753x_get_mac_eee(struct dsa_switch *ds, int port,
  			      struct ethtool_keee *e)
  {
-@@ -3249,6 +3314,7 @@ static int mt753x_port_setup(struct dsa_switch *ds, int port)
+@@ -3202,6 +3267,7 @@ static int mt753x_port_setup(struct dsa_
  const struct dsa_switch_ops mt7530_switch_ops = {
  	.get_tag_protocol	= mtk_get_tag_protocol,
  	.setup			= mt753x_setup,
@@ -140,7 +138,7 @@ index 796dd08..ec6ab99 100644
  	.preferred_default_local_cpu_port = mt753x_preferred_default_local_cpu_port,
  	.get_strings		= mt7530_get_strings,
  	.get_ethtool_stats	= mt7530_get_ethtool_stats,
-@@ -3371,6 +3437,9 @@ mt7530_probe_common(struct mt7530_priv *priv)
+@@ -3324,6 +3390,9 @@ mt7530_probe_common(struct mt7530_priv *
  	priv->ds->ops = &mt7530_switch_ops;
  	priv->ds->phylink_mac_ops = &mt753x_phylink_mac_ops;
  	mutex_init(&priv->reg_mutex);
@@ -150,8 +148,6 @@ index 796dd08..ec6ab99 100644
  	dev_set_drvdata(dev, priv);
  
  	return 0;
-diff --git a/drivers/net/dsa/mt7530.h b/drivers/net/dsa/mt7530.h
-index 5afcb2d..baf7e18 100644
 --- a/drivers/net/dsa/mt7530.h
 +++ b/drivers/net/dsa/mt7530.h
 @@ -770,6 +770,7 @@ struct mt7530_fdb {
@@ -170,7 +166,7 @@ index 5afcb2d..baf7e18 100644
  };
  
  /* Port 5 mode definitions of the MT7530 switch */
-@@ -851,6 +853,9 @@ struct mt753x_info {
+@@ -849,6 +851,9 @@ struct mt753x_info {
   * @create_sgmii:	Pointer to function creating SGMII PCS instance(s)
   * @active_cpu_ports:	Holding the active CPU ports
   * @mdiodev:		The pointer to the MDIO device structure
@@ -180,7 +176,7 @@ index 5afcb2d..baf7e18 100644
   */
  struct mt7530_priv {
  	struct device		*dev;
-@@ -878,6 +883,9 @@ struct mt7530_priv {
+@@ -874,6 +879,9 @@ struct mt7530_priv {
  	int (*create_sgmii)(struct mt7530_priv *priv);
  	u8 active_cpu_ports;
  	struct mdio_device *mdiodev;
@@ -190,6 +186,3 @@ index 5afcb2d..baf7e18 100644
  };
  
  struct mt7530_hw_vlan_entry {
--- 
-2.45.2
-

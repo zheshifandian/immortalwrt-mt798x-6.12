@@ -27,7 +27,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
 
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -2106,6 +2106,18 @@ static inline void mtk_pse_gdm_enable(st
+@@ -2179,6 +2179,18 @@ static inline void mtk_pse_gdm_enable(st
  	mtk_w32(eth, val, MTK_FE_GLO_CFG(PSE_GDM_PORT(id)));
  }
  
@@ -57,7 +57,7 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  	for (i = 0; i < ARRAY_SIZE(dev->tx_ring); i++) {
  		if (!dev->tx_ring[i].desc)
  			continue;
-@@ -2784,6 +2786,7 @@ mtk_wed_start(struct mtk_wed_device *dev
+@@ -2789,6 +2791,7 @@ mtk_wed_start(struct mtk_wed_device *dev
  	mtk_wed_amsdu_init(dev);
  
  	mtk_wed_dma_enable(dev);

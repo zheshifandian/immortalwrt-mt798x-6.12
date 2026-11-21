@@ -22,7 +22,7 @@ Signed-off-by: neal.yen <neal.yen@mediatek.com>
 
 --- a/drivers/net/phy/sfp.c
 +++ b/drivers/net/phy/sfp.c
-@@ -572,6 +572,7 @@ static const struct sfp_quirk sfp_quirks
+@@ -575,6 +575,7 @@ static const struct sfp_quirk sfp_quirks
  	// OEM SFP-GE-T is a 1000Base-T module with broken TX_FAULT indicator
  	SFP_QUIRK_F("OEM", "SFP-GE-T", sfp_fixup_ignore_tx_fault),
  
@@ -30,7 +30,7 @@ Signed-off-by: neal.yen <neal.yen@mediatek.com>
  	SFP_QUIRK_F("OEM", "SFP-10G-T", sfp_fixup_rollball_cc),
  	SFP_QUIRK_S("OEM", "SFP-2.5G-T", sfp_quirk_oem_2_5g),
  	SFP_QUIRK_S("OEM", "SFP-2.5G-BX10-D", sfp_quirk_2500basex),
-@@ -580,9 +581,11 @@ static const struct sfp_quirk sfp_quirks
+@@ -583,9 +584,11 @@ static const struct sfp_quirk sfp_quirks
  	SFP_QUIRK_S("OEM", "SFP-2.5G-LH20-A", sfp_quirk_2500basex),
  	SFP_QUIRK_F("OEM", "RTSFP-10", sfp_fixup_rollball_cc),
  	SFP_QUIRK_F("OEM", "RTSFP-10G", sfp_fixup_rollball_cc),

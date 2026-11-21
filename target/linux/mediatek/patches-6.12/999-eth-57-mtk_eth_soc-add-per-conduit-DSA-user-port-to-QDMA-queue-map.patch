@@ -32,7 +32,7 @@ Signed-off-by: chak-kei.lam <chak-kei.lam@mediatek.com>
 ---
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -4620,6 +4620,52 @@ static bool mtk_uses_dsa(struct net_devi
+@@ -4618,6 +4618,52 @@ static bool mtk_uses_dsa(struct net_devi
  #endif
  }
  
@@ -85,7 +85,7 @@ Signed-off-by: chak-kei.lam <chak-kei.lam@mediatek.com>
  static int mtk_device_event(struct notifier_block *n, unsigned long event, void *ptr)
  {
  	struct mtk_mac *mac = container_of(n, struct mtk_mac, device_notifier);
-@@ -4647,6 +4693,9 @@ static int mtk_device_event(struct notif
+@@ -4645,6 +4691,9 @@ static int mtk_device_event(struct notif
  	return NOTIFY_DONE;
  
  found:
@@ -95,7 +95,7 @@ Signed-off-by: chak-kei.lam <chak-kei.lam@mediatek.com>
  	if (__ethtool_get_link_ksettings(dev, &s))
  		return NOTIFY_DONE;
  
-@@ -4655,7 +4704,11 @@ found:
+@@ -4653,7 +4702,11 @@ found:
  
  	if (dsa_user_dev_check(dev)) {
  		dp = dsa_port_from_netdev(dev);
@@ -108,7 +108,7 @@ Signed-off-by: chak-kei.lam <chak-kei.lam@mediatek.com>
  	} else
  		queue = mac->id;
  
-@@ -6564,15 +6617,20 @@ static u16 mtk_select_queue(struct net_d
+@@ -6569,15 +6622,20 @@ static u16 mtk_select_queue(struct net_d
  	struct mtk_mac *mac = netdev_priv(dev);
  	struct mtk_eth *eth = mac->hw;
  	u32 mark = skb->mark & MTK_QDMA_QUEUE_MASK;
@@ -132,7 +132,7 @@ Signed-off-by: chak-kei.lam <chak-kei.lam@mediatek.com>
  
  	if (queue >= dev->num_tx_queues)
  		queue = 0;
-@@ -6856,7 +6914,7 @@ static int mtk_add_mac(struct mtk_eth *e
+@@ -6861,7 +6919,7 @@ static int mtk_add_mac(struct mtk_eth *e
  	phy_interface_t phy_mode;
  	struct phylink *phylink;
  	struct mtk_mac *mac;
@@ -141,7 +141,7 @@ Signed-off-by: chak-kei.lam <chak-kei.lam@mediatek.com>
  	int txqs = 1;
  	u32 val;
  
-@@ -6891,6 +6949,19 @@ static int mtk_add_mac(struct mtk_eth *e
+@@ -6896,6 +6954,19 @@ static int mtk_add_mac(struct mtk_eth *e
  	mac->id = id;
  	mac->hw = eth;
  	mac->of_node = np;
@@ -178,7 +178,7 @@ Signed-off-by: chak-kei.lam <chak-kei.lam@mediatek.com>
  #define MTK_QDMA_NUM_QUEUES	(eth->soc->num_tx_queues)
  #define MTK_QDMA_QUEUE_MASK	(MTK_QDMA_NUM_QUEUES - 1)
  #define MTK_QDMA_PAGE_SIZE	2048
-@@ -1781,6 +1789,7 @@ struct mtk_eth {
+@@ -1784,6 +1792,7 @@ struct mtk_eth {
  	int				ip_align;
  
  	struct metadata_dst		*dsa_meta[MTK_MAX_DSA_PORTS];
@@ -186,7 +186,7 @@ Signed-off-by: chak-kei.lam <chak-kei.lam@mediatek.com>
  
  	u8				l4s_toggle;
  	struct mtk_ppe			*ppe[3];
-@@ -1841,6 +1850,9 @@ struct mtk_mac {
+@@ -1844,6 +1853,9 @@ struct mtk_mac {
  	int				hwlro_ip_cnt;
  	unsigned int			syscfg0;
  	struct notifier_block		device_notifier;

@@ -15,7 +15,7 @@ v1: Initial PCIe PHY node with lane mux support for flexible 1x2 or 2x1
 
 --- a/arch/arm64/boot/dts/mediatek/mt7987.dtsi
 +++ b/arch/arm64/boot/dts/mediatek/mt7987.dtsi
-@@ -661,10 +661,23 @@
+@@ -658,10 +658,23 @@
  			reg = <0 0x15104800 0 0x400>;
  		};
  

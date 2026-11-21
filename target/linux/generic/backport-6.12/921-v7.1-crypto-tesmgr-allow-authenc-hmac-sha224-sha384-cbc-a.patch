@@ -15,7 +15,7 @@ Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
 
 --- a/crypto/testmgr.c
 +++ b/crypto/testmgr.c
-@@ -4435,6 +4435,7 @@ static const struct alg_test_desc alg_te
+@@ -4437,6 +4437,7 @@ static const struct alg_test_desc alg_te
  		.alg = "authenc(hmac(sha224),cbc(aes))",
  		.generic_driver = "authenc(hmac-sha224-lib,cbc(aes-generic))",
  		.test = alg_test_aead,
@@ -23,7 +23,7 @@ Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
  		.suite = {
  			.aead = __VECS(hmac_sha224_aes_cbc_tv_temp)
  		}
-@@ -4493,6 +4494,7 @@ static const struct alg_test_desc alg_te
+@@ -4495,6 +4496,7 @@ static const struct alg_test_desc alg_te
  		.alg = "authenc(hmac(sha384),cbc(aes))",
  		.generic_driver = "authenc(hmac-sha384-lib,cbc(aes-generic))",
  		.test = alg_test_aead,

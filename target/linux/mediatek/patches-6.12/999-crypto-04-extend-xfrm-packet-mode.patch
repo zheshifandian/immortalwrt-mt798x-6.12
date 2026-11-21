@@ -12,7 +12,7 @@ v1: Extend XFRM packet mode for hardware offload support
 
 --- a/net/8021q/vlan_dev.c
 +++ b/net/8021q/vlan_dev.c
-@@ -622,6 +622,9 @@ static netdev_features_t vlan_dev_fix_fe
+@@ -648,6 +648,9 @@ static netdev_features_t vlan_dev_fix_fe
  	features = netdev_intersect_features(features, lower_features);
  	features |= old_features & (NETIF_F_SOFT_FEATURES | NETIF_F_GSO_SOFTWARE_ALL);
  
@@ -24,7 +24,7 @@ v1: Extend XFRM packet mode for hardware offload support
  
 --- a/net/xfrm/xfrm_output.c
 +++ b/net/xfrm/xfrm_output.c
-@@ -621,38 +621,6 @@ out:
+@@ -610,38 +610,6 @@ out:
  }
  EXPORT_SYMBOL_GPL(xfrm_output_resume);
  
@@ -63,7 +63,7 @@ v1: Extend XFRM packet mode for hardware offload support
  static int xfrm_output2(struct net *net, struct sock *sk, struct sk_buff *skb)
  {
  	return xfrm_output_resume(sk, skb, 1);
-@@ -772,18 +740,16 @@ int xfrm_output(struct sock *sk, struct
+@@ -761,18 +729,16 @@ int xfrm_output(struct sock *sk, struct
  			return -EHOSTUNREACH;
  		}
  

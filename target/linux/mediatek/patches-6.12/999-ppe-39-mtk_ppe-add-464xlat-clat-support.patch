@@ -147,7 +147,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add 464xlat clat support
  		return 0;
  	default:
  		WARN_ON_ONCE(1);
-@@ -566,17 +597,30 @@ int mtk_foe_entry_set_dsa(struct mtk_eth
+@@ -557,17 +588,30 @@ int mtk_foe_entry_set_dsa(struct mtk_eth
  int mtk_foe_entry_set_dscp(struct mtk_eth *eth, struct mtk_foe_entry *entry,
  			   unsigned int dscp)
  {
@@ -182,7 +182,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add 464xlat clat support
  	return 0;
  }
  
-@@ -1096,6 +1140,11 @@ void __mtk_ppe_check_skb(struct mtk_ppe
+@@ -1132,6 +1176,11 @@ void __mtk_ppe_check_skb(struct mtk_ppe
  			continue;
  		}
  
@@ -194,7 +194,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add 464xlat clat support
  		entry->hash = hash;
  		__mtk_foe_entry_commit(ppe, &entry->data, hash);
  		found = true;
-@@ -1389,6 +1438,11 @@ void mtk_ppe_start(struct mtk_ppe *ppe)
+@@ -1425,6 +1474,11 @@ void mtk_ppe_start(struct mtk_ppe *ppe)
  	}
  	ppe_w32(ppe, MTK_PPE_GLO_CFG, val);
  
@@ -271,7 +271,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add 464xlat clat support
  struct mtk_ppe {
  	struct mtk_eth *eth;
  	struct device *dev;
-@@ -443,5 +462,6 @@ int mtk_flow_entry_match_len(struct mtk_
+@@ -441,5 +460,6 @@ int mtk_flow_entry_match_len(struct mtk_
  bool mtk_flow_entry_match(struct mtk_eth *eth, struct mtk_flow_entry *entry,
  			  struct mtk_foe_entry *data, int len);
  void mtk_flow_offload_teardown_by_tnl(struct mtk_eth *eth, u32 mode, int id);
@@ -370,7 +370,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add 464xlat clat support
  		}
  
  		if (type >= MTK_PPE_PKT_TYPE_IPV4_DSLITE) {
-@@ -490,6 +512,88 @@ mtk_ppe_internal_debugfs_foe_bind_show(s
+@@ -436,6 +458,88 @@ mtk_ppe_internal_debugfs_foe_bind_show(s
  }
  DEFINE_SHOW_ATTRIBUTE(mtk_ppe_internal_debugfs_foe_bind);
  
@@ -459,7 +459,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add 464xlat clat support
  int mtk_ppe_internal_debugfs_init(struct mtk_eth *eth)
  {
  	struct dentry *root;
-@@ -546,6 +650,17 @@ int mtk_ppe_internal_debugfs_init(struct
+@@ -490,6 +594,17 @@ int mtk_ppe_internal_debugfs_init(struct
  		debugfs_create_symlink(name, root, name_symlink);
  	}
  

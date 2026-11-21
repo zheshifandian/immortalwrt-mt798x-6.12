@@ -42,11 +42,9 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  drivers/net/ethernet/mediatek/mtk_eth_soc.c | 18 ++++++++++++------
  1 file changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_eth_soc.c b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-index a82bfab..95cfe45 100644
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -4810,9 +4810,6 @@ static int mtk_open(struct net_device *dev)
+@@ -4818,9 +4818,6 @@ static int mtk_open(struct net_device *d
  		if (err)
  			return err;
  
@@ -56,7 +54,7 @@ index a82bfab..95cfe45 100644
  		for (i = 0; i < MTK_MAX_DEVS; i++) {
  			if (!eth->netdev[i])
  				continue;
-@@ -4994,9 +4991,6 @@ static int mtk_stop(struct net_device *dev)
+@@ -5002,9 +4999,6 @@ static int mtk_stop(struct net_device *d
  
  	mtk_dma_free(eth);
  
@@ -66,7 +64,7 @@ index a82bfab..95cfe45 100644
  	return 0;
  }
  
-@@ -6124,6 +6118,9 @@ static void mtk_pending_work(struct work_struct *work)
+@@ -6132,6 +6126,9 @@ static void mtk_pending_work(struct work
  		__set_bit(i, &restart);
  	}
  
@@ -76,7 +74,7 @@ index a82bfab..95cfe45 100644
  	usleep_range(15000, 16000);
  
  	if (eth->dev->pins)
-@@ -6131,6 +6128,9 @@ static void mtk_pending_work(struct work_struct *work)
+@@ -6139,6 +6136,9 @@ static void mtk_pending_work(struct work
  				     eth->dev->pins->default_state);
  	mtk_hw_init(eth, true);
  
@@ -86,7 +84,7 @@ index a82bfab..95cfe45 100644
  	/* restart DMA and enable IRQs */
  	for (i = 0; i < MTK_MAX_DEVS; i++) {
  		if (!eth->netdev[i] || !test_bit(i, &restart))
-@@ -7562,6 +7562,9 @@ static int mtk_probe(struct platform_device *pdev)
+@@ -7570,6 +7570,9 @@ static int mtk_probe(struct platform_dev
  		err = mtk_ppe_internal_debugfs_init(eth);
  		if (err)
  			goto err_deinit_ppe;
@@ -96,7 +94,7 @@ index a82bfab..95cfe45 100644
  	}
  
  	/* we run 2 devices on the same DMA ring so we need a dummy device
-@@ -7662,6 +7665,9 @@ static void mtk_remove(struct platform_device *pdev)
+@@ -7681,6 +7684,9 @@ static void mtk_remove(struct platform_d
  			mtk_usxgmii_pcs_put(mac->usxgmii_pcs);
  	}
  
@@ -106,6 +104,3 @@ index a82bfab..95cfe45 100644
  	mtk_wed_exit();
  	mtk_hw_deinit(eth);
  
--- 
-2.45.2
-

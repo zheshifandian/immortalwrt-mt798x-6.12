@@ -1,6 +1,6 @@
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -8343,7 +8343,7 @@ static const struct mtk_soc_data mt7981_
+@@ -8347,7 +8347,7 @@ static const struct mtk_soc_data mt7981_
  	.required_clks = MT7981_CLKS_BITMAP,
  	.required_pctl = false,
  	.version = 2,
@@ -9,7 +9,7 @@
  	.offload_version = 2,
  	.ppe_num = 2,
  	.hash_offset = 4,
-@@ -8374,7 +8374,7 @@ static const struct mtk_soc_data mt7986_
+@@ -8378,7 +8378,7 @@ static const struct mtk_soc_data mt7986_
  	.required_clks = MT7986_CLKS_BITMAP,
  	.required_pctl = false,
  	.version = 2,
@@ -18,7 +18,7 @@
  	.offload_version = 2,
  	.ppe_num = 2,
  	.hash_offset = 4,
-@@ -8405,7 +8405,7 @@ static const struct mtk_soc_data mt7987_
+@@ -8409,7 +8409,7 @@ static const struct mtk_soc_data mt7987_
  	.required_clks = MT7987_CLKS_BITMAP,
  	.required_pctl = false,
  	.version = 3,
@@ -27,7 +27,7 @@
  	.offload_version = 2,
  	.ppe_num = 2,
  	.hash_offset = 4,
-@@ -8436,7 +8436,7 @@ static const struct mtk_soc_data mt7988_
+@@ -8440,7 +8440,7 @@ static const struct mtk_soc_data mt7988_
  	.required_clks = MT7988_CLKS_BITMAP,
  	.required_pctl = false,
  	.version = 3,

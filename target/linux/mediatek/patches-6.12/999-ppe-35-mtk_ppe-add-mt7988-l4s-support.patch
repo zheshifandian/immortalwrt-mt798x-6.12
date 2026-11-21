@@ -24,7 +24,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add mt7988 l4s support
 
 --- a/drivers/net/ethernet/mediatek/mtk_ppe.c
 +++ b/drivers/net/ethernet/mediatek/mtk_ppe.c
-@@ -642,6 +642,17 @@ int mtk_foe_entry_set_cdrt(struct mtk_et
+@@ -633,6 +633,17 @@ int mtk_foe_entry_set_cdrt(struct mtk_et
  	return 0;
  }
  
@@ -160,7 +160,7 @@ Subject: [PATCH] net: ethernet: mtk_ppe: add mt7988 l4s support
  		ret = snprintf(name, sizeof(name), "qdma_sch%ld", i);
 --- a/drivers/net/ethernet/mediatek/mtk_ppe_offload.c
 +++ b/drivers/net/ethernet/mediatek/mtk_ppe_offload.c
-@@ -341,8 +341,13 @@ mtk_flow_set_output_device(struct mtk_et
+@@ -388,8 +388,13 @@ mtk_flow_set_output_device(struct mtk_et
  		ct_mark = mtk_flow_get_ct_mark(ct);
  	}
  

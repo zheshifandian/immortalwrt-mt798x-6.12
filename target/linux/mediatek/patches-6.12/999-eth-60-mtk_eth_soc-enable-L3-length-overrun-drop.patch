@@ -25,11 +25,9 @@ Signed-off-by: Bo-Cun Chen <bc-bocun.chen@mediatek.com>
  drivers/net/ethernet/mediatek/mtk_eth_soc.h |  29 ++-
  2 files changed, 298 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_eth_soc.c b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-index 04812db..86e15d9 100644
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c
-@@ -4514,9 +4514,186 @@ static irqreturn_t mtk_handle_irq(int irq, void *_eth)
+@@ -4493,9 +4493,186 @@ static irqreturn_t mtk_handle_irq(int ir
  	return IRQ_HANDLED;
  }
  
@@ -218,7 +216,7 @@ index 04812db..86e15d9 100644
  	u32 status, val;
  
  	status = mtk_r32(eth, MTK_FE_INT_STATUS) & mtk_r32(eth, MTK_FE_INT_ENABLE);
-@@ -4551,6 +4728,85 @@ static irqreturn_t mtk_handle_irq_misc(int irq, void *_eth)
+@@ -4529,6 +4706,85 @@ static irqreturn_t mtk_handle_irq_misc(i
  	return IRQ_HANDLED;
  }
  
@@ -304,7 +302,7 @@ index 04812db..86e15d9 100644
  #ifdef CONFIG_NET_POLL_CONTROLLER
  static void mtk_poll_controller(struct net_device *dev)
  {
-@@ -5812,6 +6068,18 @@ static int mtk_hw_init(struct mtk_eth *eth, bool reset)
+@@ -5788,6 +6044,18 @@ static int mtk_hw_init(struct mtk_eth *e
  			mtk_w32(eth, 0x08000707, MTK_CDMW0_THRES);
  			mtk_w32(eth, 0x00000077, MTK_CDMW1_THRES);
  		} else if (eth->soc->caps == MT7987_CAPS) {
@@ -323,11 +321,9 @@ index 04812db..86e15d9 100644
  			/* PSE should not drop port8 packets from WDMA Tx */
  			mtk_w32(eth, 0x00000100, PSE_DROP_CFG);
  
-diff --git a/drivers/net/ethernet/mediatek/mtk_eth_soc.h b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-index 36d0066..0dc2f89 100644
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.h
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.h
-@@ -129,13 +129,26 @@
+@@ -128,13 +128,26 @@
  /* Frame Engine Interrupt Status 2 Register */
  #define MTK_FE_INT_STATUS2	0x28
  
@@ -355,7 +351,7 @@ index 36d0066..0dc2f89 100644
  #define MTK_CDMQ_STAG_EN	BIT(0)
  
  /* CDMQ Exgress Control Register */
-@@ -143,6 +156,7 @@
+@@ -142,6 +155,7 @@
  
  /* CDMP Ingress Control Register */
  #define MTK_CDMP_IG_CTRL	0x400
@@ -363,7 +359,7 @@ index 36d0066..0dc2f89 100644
  #define MTK_CDMP_STAG_EN	BIT(0)
  
  /* CDMP Exgress Control Register */
-@@ -201,6 +215,19 @@
+@@ -200,6 +214,19 @@
  /* PSE Output Queue Threshold Register*/
  #define PSE_OQ_TH(x)		(0x160 + (((x) - 1) << 2))
  
@@ -383,6 +379,3 @@ index 36d0066..0dc2f89 100644
  /* Global Memroy Interface Control Register */
  #define MTK_GLO_MEM_CTRL	0x604
  #define MTK_GLO_MEM_ADDR	GENMASK(19, 0)
--- 
-2.45.2
-
